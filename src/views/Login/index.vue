@@ -1,32 +1,49 @@
 <template>
   <div class="page login-container">
-    <el-form class="login-form">
+    <el-form
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+    >
       <div class="title-container">
         <h3 class="title">
           用户登录
         </h3>
       </div>
       <!-- username -->
-      <el-form-item class="form form-username">
+      <el-form-item
+        prop="username"
+        class="form form-username"
+      >
         <span class="svg-container">
           <svg-icon icon="user" />
         </span>
         <el-input
+          v-model="loginForm.username"
           placeholder="username"
           name="username"
+          type="text"
         />
       </el-form-item>
       <!-- password -->
-      <el-form-item class="form form-password">
+      <el-form-item
+        prop="password"
+        class="form form-password"
+      >
         <span class="svg-container">
           <svg-icon icon="password" />
         </span>
         <el-input
+          :type="passwordType"
+          v-model="loginForm.password"
           placeholder="password"
           name="password"
         />
-        <span class="show-pwd">
-          <svg-icon icon="eye" />
+        <span
+          class="show-pwd"
+          @click="onChangePwdType"
+        >
+          <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
       <!-- login-btn -->
@@ -40,7 +57,25 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { validatePassword } from '@/utils/rules/rules'
+import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
+
+// 测试-数据源
+const loginForm = ref({
+  username: 'admin',
+  password: '1234'
+})
+// 验证规则
+const loginRules = ref({
+  username: [{ required: true, trigger: 'blur', message: '用户名必填' }],
+  password: [{ required: true, trigger: 'blur', validator: validatePassword() }]
+})
+
+// password-input 密文-明文显示控制
+const { passwordType, onChangePwdType } = usePasswordShowOrHide()
+</script>
 
 <style lang="scss" scoped>
 @import '@/styles/color.scss';
