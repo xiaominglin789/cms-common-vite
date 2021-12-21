@@ -9,7 +9,7 @@
       <!-- username -->
       <el-form-item class="form form-username">
         <span class="svg-container">
-          <el-icon><Avatar /></el-icon>
+          <svg-icon icon="user" />
         </span>
         <el-input
           placeholder="username"
@@ -19,15 +19,15 @@
       <!-- password -->
       <el-form-item class="form form-password">
         <span class="svg-container">
-          <el-icon><Lock /></el-icon>
+          <svg-icon icon="password" />
         </span>
         <el-input
           placeholder="password"
           name="password"
         />
-        <el-icon class="show-pwd">
-          <Lock />
-        </el-icon>
+        <span class="show-pwd">
+          <svg-icon icon="eye" />
+        </span>
       </el-form-item>
       <!-- login-btn -->
       <el-button
@@ -40,13 +40,10 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { Avatar, Lock } from '@element-plus/icons-vue'
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-@import '../../styles/color.scss';
-
+@import '@/styles/color.scss';
 .login-container {
   min-height: 100vh;
   width: 100%;
@@ -95,7 +92,7 @@ import { Avatar, Lock } from '@element-plus/icons-vue'
     .show-pwd {
       position: absolute;
       right: 10px;
-      top: 10px;
+      top: 5px;
       font-size: 20px;
       color: $dark-gray;
       cursor: pointer;
