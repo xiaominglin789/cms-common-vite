@@ -5,7 +5,11 @@ interface PasswordShowOrHideResult {
   onChangePwdType: () => void
 }
 
-export function usePasswordShowOrHide (): PasswordShowOrHideResult {
+/**
+ * 密码输入栏状态控制
+ * @returns
+ */
+export function usePasswordShowOrHide(): PasswordShowOrHideResult {
   const passwordType = ref('password')
 
   const onChangePwdType = () => {

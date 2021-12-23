@@ -23,5 +23,14 @@ export default defineConfig({
       iconDirs: [resolve(__dirname, 'src/icons/svg')],
       symbolId: 'icon-[dir]-[name]'
     })
-  ]
+  ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:7000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })

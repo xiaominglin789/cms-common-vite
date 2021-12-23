@@ -1,73 +1,62 @@
 <template>
   <div class="page login-container">
     <el-form
-      :model="loginForm"
+      ref="loginFormRef"
+      :model="loginState"
       :rules="loginRules"
       class="login-form"
     >
       <div class="title-container">
-        <h3 class="title">
-          用户登录
-        </h3>
+        <h3 class="title">用户登录</h3>
       </div>
       <!-- username -->
-      <el-form-item
-        prop="username"
-        class="form form-username"
-      >
+      <el-form-item prop="username" class="form form-username">
         <span class="svg-container">
           <svg-icon icon="user" />
         </span>
         <el-input
-          v-model="loginForm.username"
+          v-model="loginState.username"
           placeholder="username"
           name="username"
           type="text"
         />
       </el-form-item>
       <!-- password -->
-      <el-form-item
-        prop="password"
-        class="form form-password"
-      >
+      <el-form-item prop="password" class="form form-password">
         <span class="svg-container">
           <svg-icon icon="password" />
         </span>
         <el-input
           :type="passwordType"
-          v-model="loginForm.password"
+          v-model="loginState.password"
           placeholder="password"
           name="password"
         />
-        <span
-          class="show-pwd"
-          @click="onChangePwdType"
-        >
+        <span class="show-pwd" @click="onChangePwdType">
           <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
       <!-- login-btn -->
-      <el-button
-        type="primary"
-        class="btn-login"
+      <el-button type="primary" class="btn-login" @click="onHandleLogin"
+        >登录</el-button
       >
-        登录
-      </el-button>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, unref } from 'vue'
 import { validatePassword } from '@/utils/rules/rules'
 import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
+import { useStore } from '@/store/index'
+import { UserLoginRequest } from '@/utils/interfaces/user'
 
-// 测试-数据源
-const loginForm = ref({
-  username: 'admin',
-  password: '1234'
+const store = useStore()
+const loginFormRef = ref()
+const loginState = ref<UserLoginRequest>({
+  username: '',
+  password: ''
 })
-// 验证规则
 const loginRules = ref({
   username: [{ required: true, trigger: 'blur', message: '用户名必填' }],
   password: [{ required: true, trigger: 'blur', validator: validatePassword() }]
@@ -75,10 +64,25 @@ const loginRules = ref({
 
 // password-input 密文-明文显示控制
 const { passwordType, onChangePwdType } = usePasswordShowOrHide()
+
+// 登录事件触发
+const onHandleLogin = async () => {
+  unref(loginFormRef.value).validate(async (valid: boolean) => {
+    if (!valid) return
+    try {
+      const result = await store.dispatch(
+        'userModule/loginHandle',
+        loginState.value
+      )
+      console.log(result)
+    } catch (error) {}
+  })
+}
 </script>
 
 <style lang="scss" scoped>
 @import '@/styles/color.scss';
+
 .login-container {
   min-height: 100vh;
   width: 100%;
@@ -126,7 +130,7 @@ const { passwordType, onChangePwdType } = usePasswordShowOrHide()
 
     .show-pwd {
       position: absolute;
-      right: 10px;
+      right: 22px;
       top: 5px;
       font-size: 20px;
       color: $dark-gray;
