@@ -54,8 +54,8 @@ import { UserLoginRequest } from '@/utils/interfaces/user'
 const store = useStore()
 const loginFormRef = ref()
 const loginState = ref<UserLoginRequest>({
-  username: 'admin',
-  password: '123456'
+  username: '',
+  password: ''
 })
 const loginRules = ref({
   username: [{ required: true, trigger: 'blur', message: '用户名必填' }],
