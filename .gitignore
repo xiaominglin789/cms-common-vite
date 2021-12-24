@@ -4,9 +4,9 @@ dist
 dist-ssr
 *.local
 
-.husky
 .vscode
 .git
+# .husky
 # .env.develepment
 # 正式项目这个production配置应该在公司内部操作,不要暴露在github上
 # .env.production

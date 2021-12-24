@@ -3,7 +3,7 @@ import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router'
 const publicRoutes: RouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/login'
+    component: () => import('@/layout/index.vue')
   },
   {
     path: '/login',

@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
+import { ElNotification, ElMessage } from 'element-plus'
 
 const service = axios.create({
   baseURL: String(import.meta.env.VITE_APP_BASE_URL) || '',
@@ -34,16 +35,26 @@ service.interceptors.response.use(
   (error: AxiosError) => {
     // 请求超时，网络异常
     if (error?.response) {
-      // 弹窗处理
-      const status = error?.response.status
-      console.error('请求异常，status:', status)
+      // 弹窗通知处理
+      ElNotification({
+        title: '网络异常',
+        message: '请检查您的网络状况...',
+        type: 'error'
+      })
+      console.error('请求异常，status:', error?.response.status)
     }
     if (error.code === 'ECONNABORTED' && error.message.includes('timeout')) {
-      // 弹窗处理或重新发生请求
+      // 通知处理或重新发生请求
+      ElNotification({
+        title: '超时请求',
+        message: '网络状况拥堵,请求超时了',
+        type: 'error'
+      })
       console.error('请求超时')
     }
 
-    // 可以交给页面单独处理
+    // 消息提示
+    ElMessage.error('网络出问题了...')
     return Promise.reject(error)
   }
 )

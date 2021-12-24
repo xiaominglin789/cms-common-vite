@@ -5,6 +5,7 @@ import router from './router'
 import { store, key } from './store'
 import './styles/reset.css'
 import { useSvgIcon } from '@/plugins/iconSvg'
+import './permission'
 
 const app = createApp(App)
 

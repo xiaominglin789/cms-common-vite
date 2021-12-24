@@ -5,7 +5,7 @@ import userModule from './modules/user'
 
 export const key: InjectionKey<Store<RootStateTypes>> = Symbol('xxx')
 
-export const store = createStore({
+export const store = createStore<RootStateTypes>({
   modules: {
     userModule
   }

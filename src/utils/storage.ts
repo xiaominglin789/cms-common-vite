@@ -1,5 +1,11 @@
 /** CacheLocal 本地缓存 */
 class CacheLocal {
+  /**
+   * 设置缓存
+   * @param key
+   * @param value
+   * @returns
+   */
   static set(key: string, value: any) {
     if (!key || !value || JSON.stringify(value) === '{}') {
       return
@@ -13,6 +19,11 @@ class CacheLocal {
     localStorage.setItem(key, valueStr)
   }
 
+  /**
+   * 获取缓存
+   * @param key
+   * @returns
+   */
   static get(key: string) {
     if (!key) return
 
@@ -24,6 +35,11 @@ class CacheLocal {
     }
   }
 
+  /**
+   * 移除某个缓存
+   * @param key
+   * @returns
+   */
   static remove(key: string) {
     if (!key) return
 
@@ -38,6 +54,12 @@ class CacheLocal {
 
 /** CacheSession 临时缓存 */
 class CacheSession {
+  /**
+   * 设置缓存
+   * @param key
+   * @param value
+   * @returns
+   */
   static set(key: string, value: any) {
     if (!key || !value || JSON.stringify(value) === '{}') {
       return
@@ -50,6 +72,11 @@ class CacheSession {
     window.sessionStorage.setItem(key, valueStr)
   }
 
+  /**
+   * 获取缓存
+   * @param key
+   * @returns
+   */
   static get(key: string) {
     if (!key) return
 
@@ -61,6 +88,11 @@ class CacheSession {
     }
   }
 
+  /**
+   * 移除某个缓存
+   * @param key
+   * @returns
+   */
   static remove(key: string) {
     if (!key) return
 
