@@ -2,7 +2,7 @@ import { Module } from 'vuex'
 import { UserStateTypes, RootStateTypes } from '../interface/index'
 import { userLogin } from '@/api/user'
 import { UserLoginRequest } from '@/utils/interfaces/user'
-import { useAESEncrypt, useBase64Encrypt } from '@/utils/crypto'
+import { useUserInfoCryptoEncode } from '@/hooks/useUserInfoCryptoEncode'
 
 const userModule: Module<UserStateTypes, RootStateTypes> = {
   namespaced: true,
@@ -15,8 +15,11 @@ const userModule: Module<UserStateTypes, RootStateTypes> = {
     /** 登录 */
     loginHandle(context, userInfo: UserLoginRequest) {
       const { username, password } = userInfo
-      const usernamed = useAESEncrypt(username)
-      const passworded = useAESEncrypt(useBase64Encrypt(password))
+      const encodeHelper = useUserInfoCryptoEncode()
+
+      const usernamed = encodeHelper.doUsenameEncode(username)
+      const passworded = encodeHelper.doPasswordEncode(password)
+
       return userLogin({ username: usernamed, password: passworded })
     }
   }
