@@ -1,0 +1,29 @@
+/* 维护公共css变量 */
+
+// app
+$app-bg: #2d3a4b;
+$dark-gray: #889aa4;
+$lint-gray: #eee;
+$cursor: #fff;
+
+// sidebar-menu
+$menuBg: #304156;
+$menuHover: #263445;
+$menuText: #bfcbd9;
+$menuActiveText: #ffffff;
+$subMenuActiveText: #f4f4f5;
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+
+$sideBarWith: 210px;
+
+// scss =导出给=> js, css变量共享
+:export {
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+}

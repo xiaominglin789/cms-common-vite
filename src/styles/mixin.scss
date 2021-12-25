@@ -1,0 +1,87 @@
+/** 维护-公共布局样式 */
+
+/** 相对布局 */
+@mixin relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/** 清除浮动 */
+@mixin clearfix {
+  & {
+    zoom: 1;
+  } /*==for IE6/7 Maxthon2==*/
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+/** 滚动条样式 */
+@mixin crollBar {
+  &::-webkit-scrollbar-track {
+    background-color: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #99a9bf;
+    border-radius: 20px;
+  }
+}
+
+/** 
+* flex布局,默认水平方向
+* $justifyContent 水平轴设置
+* $alignItems 垂直轴设置
+*/
+@mixin flex($direction: row, $justifyContent, $alignItems) {
+  display: flex;
+  direction: $direction;
+  @if $justifyContent {
+    justify-content: $justifyContent;
+  }
+  @if $alignItems {
+    align-items: $alignItems;
+  }
+}
+
+/**
+* flex-column 垂直
+* $justifyContent 水平轴设置
+* $alignItems 垂直轴设置
+*/
+@mixin flexColumn($justifyContent, $alignItems) {
+  @include flex(column, $justifyContent, $alignItems);
+}
+
+/**
+* flex-row 水平
+* $justifyContent 水平轴设置
+* $alignItems 垂直轴设置
+*/
+@mixin flexRow($justifyContent, $alignItems) {
+  @include flex(row, $justifyContent, $alignItems);
+}
+
+/**
+* 文本省略号<div | p>
+* $line 控制文本行数
+* 兼容范围: webkit
+*/
+@mixin ellipsis($line: 1) {
+  -webkit-line-clamp: $line;
+  word-break: break-all;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+}
