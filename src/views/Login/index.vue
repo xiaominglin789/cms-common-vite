@@ -76,7 +76,7 @@ const onHandleLogin = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/color.scss';
+@import '@/styles/variables.module.scss';
 
 .login-container {
   min-height: 100vh;

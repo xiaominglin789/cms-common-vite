@@ -1,9 +1,9 @@
 import { createApp } from 'vue'
 import 'virtual:svg-icons-register'
+import './styles/import.scss'
 import App from './App.vue'
 import router from './router'
 import { store, key } from './store'
-import './styles/reset.css'
 import { useSvgIcon } from '@/plugins/iconSvg'
 import './permission'
 
