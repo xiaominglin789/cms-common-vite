@@ -6,6 +6,5 @@ export interface UserLoginRequest {
 
 /** 用户登录响应数据结构 */
 export interface UserLoginResponse {
-  msg?: string
-  token?: string
+  token: string
 }

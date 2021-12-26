@@ -32,10 +32,11 @@ const userModule: Module<UserStateTypes, RootStateTypes> = {
         username: usernamed,
         password: passworded
       })
+      console.log(result)
 
-      if (result?.token) {
+      if (result?.data?.token) {
         // 触发token的保存
-        context.commit('SET_TOKEN', result.token)
+        context.commit('SET_TOKEN', result.data.token)
         // 路由跳转,登录成功后跳转到<首页|重要页面>
         router.replace('/')
       }
