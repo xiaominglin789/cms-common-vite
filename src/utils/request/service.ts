@@ -1,17 +1,15 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosError,
-  AxiosResponse,
-  AxiosPromise
-} from 'axios'
-import { ElNotification, ElMessage } from 'element-plus'
-import { useBase64Encrypt } from '@/utils/crypto'
+import axios, { AxiosError, AxiosPromise, AxiosResponse } from 'axios'
+import { ElMessage } from 'element-plus'
 import { CacheLocal } from '@/utils/storage'
 import { CONST_TOKEN_KEY } from '@/constant'
+import { ResponseType } from '@/utils/interfaces/response'
 
 const service = axios.create({
   baseURL: String(import.meta.env.VITE_APP_BASE_URL) || '',
-  timeout: Number(import.meta.env.VITE_APP_TIME_OUT) || 5000
+  timeout: Number(import.meta.env.VITE_APP_TIME_OUT) || 5000, // 请求超时时间设置
+  validateStatus(status: number) {
+    return status >= 200 && status < 510
+  }
 })
 
 // 请求拦截器
@@ -20,9 +18,8 @@ service.interceptors.request.use(
     // 请求配置的处理
     // exp: 请求头携带token的操作
     if (CacheLocal.get(CONST_TOKEN_KEY)) {
-      config.headers.Authorization = useBase64Encrypt(
-        `Bear ${CacheLocal.get(CONST_TOKEN_KEY)}`
-      )
+      // 与后端约定令牌传输: Authorization bearer
+      config.headers.Authorization = `Bearer ${CacheLocal.get(CONST_TOKEN_KEY)}`
     }
     return config
   },
@@ -31,31 +28,29 @@ service.interceptors.request.use(
 
 // 响应拦截器
 service.interceptors.response.use(
-  (response: AxiosResponse) => {
-    // test
-    console.log('~~: ', response)
-
-    // 请求有相应
+  (response: AxiosResponse<ResponseType<any>, any>) => {
     // 2xx
     const status = response.status
     if (String(status).charAt(0) === '2') {
-      return response.data
+      return response.data.data
     }
 
+    const { code, message } = response.data
     return new Promise((resolve, rejects) => {
       // 业务异常处理 4xx 5xx 状态码+错误码-统一处理: 弹窗...
+      console.log('code = ', code, ' message = ', message)
 
-      //
+      if (code && message) {
+        ElMessage.error(message)
+      }
+
       rejects(response)
     })
   },
   (error: AxiosError) => {
-    // test
-    // console.log('~~: ', error)
-
     if (!error.response) {
       ElMessage.error('请检查 API 是否异常')
-      console.log('error', error)
+      console.error('请检查 API 是否异常')
     }
 
     // 判断请求超时
@@ -63,8 +58,10 @@ service.interceptors.response.use(
       error.code === 'ECONNABORTED' &&
       error.message.indexOf('timeout') !== -1
     ) {
-      ElMessage.warning('请求超时')
+      ElMessage.error('请求超时')
+      console.error('请求超时')
     }
+
     return Promise.reject(error)
   }
 )
@@ -103,7 +100,7 @@ function post<T>(url: string, data?: Record<string, any>): AxiosPromise<T> {
  * @param data body参数对象, key-value
  * @returns Promise
  */
-function put<T>(url: string, data?: Record<string, any>): AxiosPromise<any> {
+function put<T>(url: string, data?: Record<string, any>): AxiosPromise<T> {
   return service({
     method: 'PUT',
     url,

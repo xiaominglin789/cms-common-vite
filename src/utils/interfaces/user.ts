@@ -6,5 +6,6 @@ export interface UserLoginRequest {
 
 /** 用户登录响应数据结构 */
 export interface UserLoginResponse {
-  token: string
+  access_token: string
+  refresh_token?: string
 }

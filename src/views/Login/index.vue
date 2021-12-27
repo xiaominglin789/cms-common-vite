@@ -66,7 +66,7 @@ const loginRules = ref({
 const { passwordType, onChangePwdType } = usePasswordShowOrHide()
 
 // 登录事件触发
-const onHandleLogin = async () => {
+const onHandleLogin = () => {
   unref(loginFormRef.value).validate(async (valid: boolean) => {
     if (!valid) return
 

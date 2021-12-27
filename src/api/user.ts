@@ -1,6 +1,5 @@
-import { get, post } from '@/utils/request/service'
+import { post } from '@/utils/request/service'
 import { UserLoginRequest, UserLoginResponse } from '@/utils/interfaces/user'
-import { ResponseType } from '@/utils/interfaces/response'
 
 /**
  * 登录接口
@@ -8,6 +7,5 @@ import { ResponseType } from '@/utils/interfaces/response'
  * @returns
  */
 export const userLogin = async (userInfo: UserLoginRequest) => {
-  // console.log(userInfo)
-  return post<ResponseType<UserLoginResponse>>('/user/login', userInfo)
+  return post<UserLoginResponse>('/admin/login', userInfo)
 }
