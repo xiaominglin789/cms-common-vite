@@ -69,7 +69,6 @@ const { passwordType, onChangePwdType } = usePasswordShowOrHide()
 const onHandleLogin = () => {
   unref(loginFormRef.value).validate(async (valid: boolean) => {
     if (!valid) return
-
     await store.dispatch('userModule/loginHandle', loginState.value)
   })
 }

@@ -32,7 +32,7 @@ service.interceptors.response.use(
     // 2xx
     const status = response.status
     if (String(status).charAt(0) === '2') {
-      return response.data.data
+      return response.data
     }
 
     const { code, message } = response.data

@@ -2,10 +2,12 @@ import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { InjectionKey } from 'vue'
 import { RootStateTypes } from './interface/index'
 import userModule from './modules/user'
+import getters from './getters'
 
 export const key: InjectionKey<Store<RootStateTypes>> = Symbol()
 
 export const store = createStore<RootStateTypes>({
+  getters,
   modules: {
     userModule
   }

@@ -6,4 +6,5 @@ export interface RootStateTypes {
 /** 用户信息数据类型 */
 export interface UserStateTypes {
   token: string
+  userInfo: {}
 }

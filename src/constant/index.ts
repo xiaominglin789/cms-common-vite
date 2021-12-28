@@ -13,3 +13,7 @@ export const CONST_ROUTER_LOGIN =
 /** 登录后跳转的第一个路由 */
 export const CONST_ROUTER_LOGINED_FIRST =
   String(import.meta.env.VITE_APP_ROUTER_LOGINED_FIRST) || '/'
+
+/** 用户信息缓存key */
+export const CONST_USER_INFO_KEY =
+  String(import.meta.env.VITE_APP_USER_INFO_KEY) || 'user'
