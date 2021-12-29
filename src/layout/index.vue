@@ -25,21 +25,20 @@ import styles from '@/styles/variables.module.scss'
 @import '@/styles/variables.module.scss';
 
 .app-wrapper {
-  @include clearfix;
+  // @include clearfix;
   @include relative;
   display: flex;
-
+  min-height: 100vh;
   .side-container {
   }
-
   .main-container {
-    width: 100%;
+    width: calc(100% - #{$sideBarWith});
     .navbar-container {
       position: fixed;
       top: 0;
       z-index: 999;
+      width: calc(100% - #{$sideBarWith});
     }
-
     .appmain-container {
     }
   }

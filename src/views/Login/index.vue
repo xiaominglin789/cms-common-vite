@@ -48,10 +48,10 @@
 import { ref, unref } from 'vue'
 import { validatePassword } from '@/utils/rules/rules'
 import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
-import { useStore } from '@/store/index'
+import { useUserStore } from '@/store/user'
 import { UserLoginRequest } from '@/utils/interfaces/user'
 
-const store = useStore()
+const userStore = useUserStore()
 const loginFormRef = ref()
 const loginState = ref<UserLoginRequest>({
   username: 'admin',
@@ -69,7 +69,7 @@ const { passwordType, onChangePwdType } = usePasswordShowOrHide()
 const onHandleLogin = () => {
   unref(loginFormRef.value).validate(async (valid: boolean) => {
     if (!valid) return
-    await store.dispatch('userModule/loginHandle', loginState.value)
+    await userStore.login(loginState.value)
   })
 }
 </script>

@@ -43,7 +43,7 @@
 */
 @mixin flex($direction: row, $justifyContent, $alignItems) {
   display: flex;
-  direction: $direction;
+  flex-direction: $direction;
   @if $justifyContent {
     justify-content: $justifyContent;
   }

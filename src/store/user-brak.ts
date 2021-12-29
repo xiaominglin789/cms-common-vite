@@ -12,22 +12,27 @@ import {
 } from '@/constant'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
-import { isEmptyObject } from '@/utils/utils'
-import { stat } from 'fs'
+import { UserInformation } from '@/utils/interfaces/user'
+import { USER_SET_TOKEN, USER_SET_USER_INFO } from '@/store/mutation-types'
 
-const userModule: Module<UserStateTypes, RootStateTypes> = {
+const user: Module<UserStateTypes, RootStateTypes> = {
   namespaced: true,
-  state: {
-    token: CacheLocal.get(CONST_TOKEN_KEY) || '',
-    userInfo: {}
+  state: () => {
+    return {
+      token: CacheLocal.get(CONST_TOKEN_KEY) || '',
+      userInfo: (CacheLocal.get(CONST_USER_INFO_KEY) as UserInformation) || {}
+    }
+  },
+  getters: {
+    token: (state) => state.token
   },
   mutations: {
-    SET_TOKEN(state, token: string) {
+    [USER_SET_TOKEN](state, token: string) {
       state.token = token
       // 本地缓存
       CacheLocal.set(CONST_TOKEN_KEY, token)
     },
-    SET_USER_INFO(state, info: {}) {
+    [USER_SET_USER_INFO](state, info: UserInformation) {
       state.userInfo = info
       // 本地缓存
       CacheLocal.set(CONST_USER_INFO_KEY, info)
@@ -52,13 +57,9 @@ const userModule: Module<UserStateTypes, RootStateTypes> = {
 
         if (result.data.access_token) {
           // 触发token的保存,然后跳转到<首页|重要页面>
-          console.log('2')
-          commit('SET_TOKEN', result.data.access_token)
-          console.log('3')
-          console.log('4')
+          commit(USER_SET_TOKEN, result.data.access_token)
           result.data.refresh_token &&
             CacheLocal.set(CONST_REFRESH_TOKEN_KEY, result.data.refresh_token)
-          console.log('5')
           ElMessage.success('登录成功...')
           router.replace(CONST_ROUTER_LOGINED_FIRST)
         } else {
@@ -67,15 +68,15 @@ const userModule: Module<UserStateTypes, RootStateTypes> = {
       } catch (error) {}
     },
     /** 获取用户信息 */
-    async getUerInfo({ commit }) {
+    async getUserInfo({ commit }) {
       try {
         const result = await getUserInformation()
         // 保存用户信息
-        result.data && commit('SET_USER_INFO', result.data)
+        result.data && commit(USER_SET_USER_INFO, result.data)
         return result.data
       } catch (error) {}
     }
   }
 }
 
-export default userModule
+export default user
