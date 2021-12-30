@@ -8,18 +8,26 @@
       </span>
     </div>
     <div class="right-nav">
-      <el-dropdown>
-        <div style="cursor: pointer">下拉菜单</div>
-        <div class="avatar-swrapper">
-          <!-- <el-avatar :size="50" :src="avatarUrl"></el-avatar> -->
-          {{ userAvatar }}
+      <el-dropdown trigger="click">
+        <div class="avatar-box">
+          <!-- 圆角头像 -->
+          <el-avatar shape="square" :size="30" :src="userAvatar"></el-avatar>
+          <i></i>
         </div>
+        <!-- 头像下拉菜单 -->
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>1</el-dropdown-item>
-            <el-dropdown-item>1</el-dropdown-item>
-            <el-dropdown-item>1</el-dropdown-item>
-            <el-dropdown-item>1</el-dropdown-item>
+            <el-dropdown-item>
+              <router-link to="/">首页</router-link>
+            </el-dropdown-item>
+            <el-dropdown-item>
+              <a
+                target="__blank"
+                href="https://github.com/xiaominglin789/cms-common-vite"
+                >Github仓库</a
+              >
+            </el-dropdown-item>
+            <el-dropdown-item divided> 退出登录 </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -28,13 +36,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref } from 'vue'
 import { useUserStore } from '@/store/user'
-import { UserInformation } from '@/utils/interfaces/user'
+import userAvatarDefualt from '@/assets/logo.png'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
-const userAvatar = computed(() => userStore.userInfo.avatar)
+const userAvatar = computed(
+  () => userStore.userInfo.avatar || userAvatarDefualt
+)
 
 const onTriggerMenu = () => {
   console.log('ggggggggggggg')
@@ -48,13 +58,20 @@ const onTriggerMenu = () => {
   @include flexRow(space-between, center);
   width: 100%;
   height: 60px;
+  overflow: hidden;
   padding: 0 16px 0 4px;
+  box-shadow: 0px 1px 1px #bfcbd9;
   .left-nav {
     .show-menu-btn {
       display: inline-block;
       width: 32px;
       height: 32px;
       @include flexRow(center, center);
+    }
+  }
+  .right-nav {
+    .el-avatar {
+      --el-avatar-bg-color: none;
     }
   }
 }
