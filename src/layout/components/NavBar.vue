@@ -27,7 +27,9 @@
                 >Github仓库</a
               >
             </el-dropdown-item>
-            <el-dropdown-item divided> 退出登录 </el-dropdown-item>
+            <el-dropdown-item @click="onLogout" divided>
+              退出登录
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -49,6 +51,11 @@ const userAvatar = computed(
 const onTriggerMenu = () => {
   console.log('ggggggggggggg')
 }
+
+/** 点击退出登录 */
+const onLogout = async () => {
+  await userStore.logout()
+}
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +68,7 @@ const onTriggerMenu = () => {
   overflow: hidden;
   padding: 0 16px 0 4px;
   box-shadow: 0px 1px 1px #bfcbd9;
+
   .left-nav {
     .show-menu-btn {
       display: inline-block;
@@ -69,6 +77,7 @@ const onTriggerMenu = () => {
       @include flexRow(center, center);
     }
   }
+
   .right-nav {
     .el-avatar {
       --el-avatar-bg-color: none;

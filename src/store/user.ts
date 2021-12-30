@@ -1,6 +1,7 @@
 import { getUserInformation, userLogin } from '@/api/user'
 import {
   CONST_REFRESH_TOKEN_KEY,
+  CONST_ROUTER_LOGIN,
   CONST_ROUTER_LOGINED_FIRST,
   CONST_TOKEN_KEY,
   CONST_USER_INFO_KEY
@@ -9,6 +10,7 @@ import { useUserInfoCryptoEncode } from '@/hooks/useUserInfoCryptoEncode'
 import router from '@/router'
 import { UserInformation, UserLoginRequest } from '@/utils/interfaces/user'
 import { CacheLocal } from '@/utils/storage'
+import { ElMessage } from 'element-plus'
 import { defineStore } from 'pinia'
 import { EnumStoreID } from './store-id-enum'
 
@@ -29,12 +31,15 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
   },
   actions: {
     /** 更新access_token状态,同步到缓存 */
-    updateToken(access_token: string): void {
-      console.log('loginHandle -> updateToken')
-      if (!access_token) return
-      this.token = access_token
-      // 本地缓存
-      CacheLocal.set(CONST_TOKEN_KEY, access_token)
+    updateToken(access_token: string, refresh_token?: string): void {
+      if (access_token) {
+        this.token = access_token
+        // 本地缓存access_token
+        CacheLocal.set(CONST_TOKEN_KEY, access_token)
+      }
+
+      // 缓存refresh_token
+      refresh_token && CacheLocal.set(CONST_REFRESH_TOKEN_KEY, refresh_token)
     },
     /** 更新用户信息,同步到缓存 */
     updateUserInfo(info: UserInformation) {
@@ -58,14 +63,12 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
         console.log(result)
         console.log(result.data)
 
-        if (result.data.access_token) {
+        const { access_token, refresh_token } = result.data
+        if (access_token) {
           // 触发token的保存,然后跳转到<首页|重要页面>
-          this.updateToken(result.data.access_token)
-          // 缓存refresh_token
-          result.data.refresh_token &&
-            CacheLocal.set(CONST_REFRESH_TOKEN_KEY, result.data.refresh_token)
-
+          this.updateToken(access_token, refresh_token)
           router.replace(CONST_ROUTER_LOGINED_FIRST)
+          ElMessage.success('登录成功')
         } else {
           console.error('数据结构有误: ', result)
         }
@@ -77,6 +80,21 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
         const result = await getUserInformation()
         result.data && this.updateUserInfo(result.data)
       } catch (error) {}
+    },
+    /**
+     * 注销登录
+     *  1.清理access_token、refresh_token、userInfo
+     *  2.清理权限相关配置
+     *  最后强制跳转到登录页
+     */
+    async logout() {
+      // acess
+      this.token = ''
+      CacheLocal.clear()
+      // clear permission-config
+
+      router.replace(CONST_ROUTER_LOGIN)
+      ElMessage.warning('退出成功')
     }
   }
 })

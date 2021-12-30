@@ -6,7 +6,9 @@
 </template>
 
 <script setup lang="ts">
-const onTest = async () => {}
+const onTest = async () => {
+  console.log('测试按钮点击')
+}
 </script>
 
 <style lang="scss" scoped>
