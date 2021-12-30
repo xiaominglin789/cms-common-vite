@@ -31,6 +31,10 @@
           v-model="loginState.password"
           placeholder="password"
           name="password"
+          @paste.native.capture.prevent="onStopClientCopyPasts"
+          @copy.native.capture.prevent="onStopClientCopyPasts"
+          @cut.native.capture.prevent="onStopClientCopyPasts"
+          @contextmenu.native.capture.prevent="onStopClientCopyPasts"
         />
         <span class="show-pwd" @click="onChangePwdType">
           <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'" />
@@ -54,8 +58,8 @@ import { UserLoginRequest } from '@/utils/interfaces/user'
 const userStore = useUserStore()
 const loginFormRef = ref()
 const loginState = ref<UserLoginRequest>({
-  username: 'admin',
-  password: '123456'
+  username: '',
+  password: ''
 })
 const loginRules = ref({
   username: [{ required: true, trigger: 'blur', message: '用户名必填' }],
@@ -71,6 +75,12 @@ const onHandleLogin = () => {
     if (!valid) return
     await userStore.login(loginState.value)
   })
+}
+
+/** 禁止输入框的复制粘贴操作 */
+const onStopClientCopyPasts = () => {
+  console.log('禁止xxx')
+  return false
 }
 </script>
 
