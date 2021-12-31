@@ -56,7 +56,6 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
             AuthManualTokenExpireIn.saveCurrentLoginTime()
 
           router.replace(CONST_ROUTER_LOGINED_FIRST)
-          ElMessage.success('登录成功')
         } else {
           console.error('数据结构有误: ', result)
         }

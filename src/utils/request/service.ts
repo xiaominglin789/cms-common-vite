@@ -5,10 +5,12 @@ import { useUserStore } from '@/store/user'
 import TokenHelper from '../token'
 import {
   CONST_REFRESH_TOKEN_URL,
+  CONST_SYS_TOKEN_AUTOMATIC_RENEWAL,
   CONST_SYS_USE_CLIENT_ERROR_MESSAGE
 } from '@/constant/system'
 import { AuthManualTokenExpireIn } from '../auth-token-manul'
 import FrontErrorMessage from '@/constant/frontErrorMessage'
+import { UserLoginResponse } from '../interfaces/user'
 
 const service = axios.create({
   baseURL: String(import.meta.env.VITE_APP_BASE_URL) || '',
@@ -138,10 +140,19 @@ service.interceptors.response.use(
       if (errorByAcceTokenExpireInException(code)) {
         if (AcceTokenExpireInCache.url !== url) {
           AcceTokenExpireInCache.url = url
-          const accessResult = await service.get<{ access_token: string }>(
+          const tokenResult = await service.get<UserLoginResponse>(
             CONST_REFRESH_TOKEN_URL
           )
-          TokenHelper.saveAccessToken(accessResult.data.access_token)
+          // 是否启用了双令牌刷新
+          if (CONST_SYS_TOKEN_AUTOMATIC_RENEWAL()) {
+            TokenHelper.saveToken(
+              tokenResult.data.access_token,
+              tokenResult.data.access_token
+            )
+          } else {
+            // 只刷新accessToken
+            TokenHelper.saveAccessToken(tokenResult.data.access_token)
+          }
           // 将上次失败请求重发
           const result = await service(response.config)
           return resolve(result)
@@ -150,6 +161,7 @@ service.interceptors.response.use(
           setTimeout(() => {
             AcceTokenExpireInCache.url = undefined
             userStore.logout()
+            ElMessage.warning('退出登录')
           }, 2000)
         }
       }

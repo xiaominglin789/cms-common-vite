@@ -54,6 +54,7 @@ import { validatePassword } from '@/utils/rules/rules'
 import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
 import { useUserStore } from '@/store/user'
 import { UserLoginRequest } from '@/utils/interfaces/user'
+import { ElMessage } from 'element-plus'
 
 const userStore = useUserStore()
 const loginFormRef = ref()
@@ -74,6 +75,7 @@ const onHandleLogin = () => {
   unref(loginFormRef.value).validate(async (valid: boolean) => {
     if (!valid) return
     await userStore.login(loginState.value)
+    ElMessage.success('登录成功')
   })
 }
 
