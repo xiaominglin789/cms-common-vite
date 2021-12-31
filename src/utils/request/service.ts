@@ -47,6 +47,7 @@ service.interceptors.request.use(
     ) {
       // 过期了，直接登出
       useUserStore().logout()
+      return Promise.reject(null)
     }
 
     const originConfig = { ...config }
