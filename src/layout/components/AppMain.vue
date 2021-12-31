@@ -6,6 +6,8 @@
 </template>
 
 <script setup lang="ts">
+// test
+
 const onTest = async () => {
   console.log('测试按钮点击')
 }

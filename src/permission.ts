@@ -1,12 +1,10 @@
 import router from './router'
 import {
   CONST_ROUTER_LOGIN,
-  CONST_ROUTER_LOGINED_FIRST,
-  CONST_TOKEN_KEY,
-  CONST_USER_INFO_KEY
-} from '@/constant'
-import { CacheLocal } from './utils/storage'
+  CONST_ROUTER_LOGINED_FIRST
+} from '@/constant/system'
 import { useUserStore } from './store/user'
+import TokenHelper from './utils/token'
 
 /** 路由白名单列表 */
 const writeRouteList = [CONST_ROUTER_LOGIN]
@@ -25,7 +23,7 @@ router.beforeEach(async (to, from, next) => {
   //  2.用户未登录,只允许进入<白名单路由页面>
   const userStore = useUserStore()
 
-  if (!userStore.hasToken) {
+  if (TokenHelper.getAccessToken()) {
     // 已登录
     if (to.path === CONST_ROUTER_LOGIN) {
       next(CONST_ROUTER_LOGINED_FIRST)

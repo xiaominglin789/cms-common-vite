@@ -1,8 +1,14 @@
 import axios, { AxiosError, AxiosPromise, AxiosResponse } from 'axios'
 import { ElMessage } from 'element-plus'
-import { CacheLocal } from '@/utils/storage'
-import { CONST_TOKEN_KEY } from '@/constant'
-import { ResponseType } from '@/utils/interfaces/response'
+import { EnumMethods, ResponseType } from '@/utils/interfaces/reuest'
+import { useUserStore } from '@/store/user'
+import TokenHelper from '../token'
+import {
+  CONST_REFRESH_TOKEN_URL,
+  CONST_SYS_USE_CLIENT_ERROR_MESSAGE
+} from '@/constant/system'
+import { AuthManualTokenExpireIn } from '../auth-token-manul'
+import FrontErrorMessage from '@/constant/frontErrorMessage'
 
 const service = axios.create({
   baseURL: String(import.meta.env.VITE_APP_BASE_URL) || '',
@@ -12,16 +18,95 @@ const service = axios.create({
   }
 })
 
+/** 判断是否为refresh_token刷新access_token时出现的异常 */
+function errorByRefreshTokenExeption(code: number) {
+  // 从配置中读取
+  const codes: Array<number> = [403039]
+  return codes.includes(code)
+}
+
+/** 判断是否为access_token过期异常 */
+function errorByAcceTokenExpireInException(code: number) {
+  // 从配置中读取
+  const codes: Array<number> = [403000]
+  return codes.includes(code)
+}
+
+// cache 用于过滤 重发请求仍然得到令牌过期响应,造成不断重复触发重发
+const AcceTokenExpireInCache = <{ url: string | undefined }>{}
+
 // 请求拦截器
 service.interceptors.request.use(
-  (config: any) => {
-    // 请求配置的处理
-    // exp: 请求头携带token的操作
-    if (CacheLocal.get(CONST_TOKEN_KEY)) {
-      // 与后端约定令牌传输: Authorization bearer
-      config.headers.Authorization = `Bearer ${CacheLocal.get(CONST_TOKEN_KEY)}`
+  async (config: any) => {
+    // 是否手动处理token失效
+    if (
+      AuthManualTokenExpireIn.isOpenManua &&
+      AuthManualTokenExpireIn.checkTokenIsExpireIn()
+    ) {
+      // 过期了，直接登出
+      useUserStore().logout()
     }
-    return config
+
+    const originConfig = { ...config }
+
+    if (!originConfig.url) {
+      console.error('想发送请求, 却没有传请求地址.')
+    }
+
+    // 请求method转大写,单独使用service<axios>时,需要做处理
+    originConfig.method = originConfig.method.toUpperCase()
+
+    // get、post、formdata的参数容错处理
+    switch (originConfig.method) {
+      case EnumMethods.GET:
+        if (!originConfig.params) {
+          // 参数放在data里了
+          originConfig.params = originConfig.data || {}
+        }
+        break
+      case EnumMethods.POST:
+        if (!originConfig.data) {
+          // 参数放在params里了
+          originConfig.data = originConfig.params || {}
+        }
+
+        // 第一层属性-检测是否包含文件类型
+        let hasFile = false
+        Object.keys(originConfig.data).forEach((key) => {
+          if (typeof originConfig.data[key] === 'object') {
+            const item = originConfig.data[key]
+            if (
+              item instanceof FileList ||
+              item instanceof File ||
+              item instanceof Blob
+            ) {
+              hasFile = true
+            }
+          }
+        })
+        // 检测到存在文件使用 FormData 提交数据
+        if (hasFile) {
+          const formData = new FormData()
+          Object.keys(originConfig.data).forEach((key) => {
+            formData.append(key, originConfig.data[key])
+          })
+          originConfig.data = formData
+        }
+        break
+    }
+
+    // 处理令牌刷新的请求-将refresh_token放headers里面
+    if (originConfig.url === CONST_REFRESH_TOKEN_URL) {
+      const refreshToken = TokenHelper.getRefreshToken()
+      if (refreshToken) {
+        originConfig.headers.Authorization = `Bearer ${refreshToken}`
+      }
+    } else {
+      const accessToken = TokenHelper.getAccessToken()
+      originConfig.headers.Authorization = `Bearer ${accessToken}`
+    }
+
+    return originConfig
   },
   (error) => Promise.reject(error)
 )
@@ -30,20 +115,56 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (response: AxiosResponse<ResponseType<any>, any>) => {
     // 2xx
-    const status = response.status
-    if (String(status).charAt(0) === '2') {
-      return response.data
+    if (String(response.status).charAt(0) === '2') {
+      return Promise.resolve(response.data)
     }
 
     const { code, message } = response.data
-    return new Promise((resolve, rejects) => {
+    return new Promise(async (resolve, rejects) => {
       // 业务异常处理 4xx 5xx 状态码+错误码-统一处理: 弹窗...
-      console.log('code = ', code, ' message = ', message)
+      const userStore = useUserStore()
+      const { url } = response.config
 
-      if (code && message) {
-        ElMessage.error(message)
+      // refresh_token刷新业务操作失败,直接退出登录
+      if (errorByRefreshTokenExeption(code)) {
+        ElMessage.error('服务升级完成, 稍后请重新登录')
+        setTimeout(() => {
+          userStore.logout()
+        }, 2000)
+        return resolve(null)
       }
 
+      // access_token失效,尝试刷新令牌
+      if (errorByAcceTokenExpireInException(code)) {
+        if (AcceTokenExpireInCache.url !== url) {
+          AcceTokenExpireInCache.url = url
+          const accessResult = await service.get<{ access_token: string }>(
+            CONST_REFRESH_TOKEN_URL
+          )
+          TokenHelper.saveAccessToken(accessResult.data.access_token)
+          // 将上次失败请求重发
+          const result = await service(response.config)
+          return resolve(result)
+        } else {
+          // 重发,仍得到过期响应? 那就删除缓存,回到登录页
+          setTimeout(() => {
+            AcceTokenExpireInCache.url = undefined
+            userStore.logout()
+          }, 2000)
+        }
+      }
+
+      // 错误提示信息
+      let tipMessage = ''
+      const isOpenClientMessage = CONST_SYS_USE_CLIENT_ERROR_MESSAGE()
+      if (isOpenClientMessage) {
+        // 开启客户端异常消息
+        tipMessage = FrontErrorMessage[code] || ''
+      } else {
+        tipMessage = message
+      }
+
+      tipMessage && ElMessage.error(tipMessage)
       rejects(response)
     })
   },

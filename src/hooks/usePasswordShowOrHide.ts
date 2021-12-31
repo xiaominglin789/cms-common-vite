@@ -1,6 +1,6 @@
 import { Ref, ref } from 'vue'
 
-interface PasswordShowOrHideResult {
+interface IPasswordShowOrHideResult {
   passwordType: Ref<string>
   onChangePwdType: () => void
 }
@@ -9,7 +9,7 @@ interface PasswordShowOrHideResult {
  * 密码输入栏状态控制
  * @returns
  */
-export function usePasswordShowOrHide(): PasswordShowOrHideResult {
+export function usePasswordShowOrHide(): IPasswordShowOrHideResult {
   const passwordType = ref('password')
 
   const onChangePwdType = () => {

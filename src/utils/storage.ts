@@ -1,5 +1,5 @@
-/** CacheLocal 本地缓存 */
-class CacheLocal {
+/** LocalStorageHelper 本地缓存 */
+class LocalStorageHelper {
   /**
    * 设置缓存
    * @param key
@@ -7,16 +7,15 @@ class CacheLocal {
    * @returns
    */
   static set(key: string, value: any) {
-    if (!key || !value || JSON.stringify(value) === '{}') {
-      return
-    }
+    if (!key) return
 
     let valueStr = value
+    // 复杂数据类型-将JSON.stringify转成字符串
     if (typeof value === 'object') {
       valueStr = JSON.stringify(value)
     }
 
-    localStorage.setItem(key, valueStr)
+    window.localStorage.setItem(key, valueStr)
   }
 
   /**
@@ -27,8 +26,11 @@ class CacheLocal {
   static get(key: string) {
     if (!key) return
 
-    let result = window.localStorage.getItem(key) || ''
+    let result = window.localStorage.getItem(key)
     try {
+      if (result == null) {
+        return result
+      }
       return JSON.parse(result)
     } catch (error) {
       return result
@@ -52,8 +54,8 @@ class CacheLocal {
   }
 }
 
-/** CacheSession 临时缓存 */
-class CacheSession {
+/** SessionStorageHelper 临时缓存 */
+class SessionStorageHelper {
   /**
    * 设置缓存
    * @param key
@@ -61,9 +63,7 @@ class CacheSession {
    * @returns
    */
   static set(key: string, value: any) {
-    if (!key || !value || JSON.stringify(value) === '{}') {
-      return
-    }
+    if (!key) return
 
     let valueStr = value
     if (typeof value === 'object') {
@@ -105,4 +105,4 @@ class CacheSession {
   }
 }
 
-export { CacheLocal, CacheSession }
+export { LocalStorageHelper, SessionStorageHelper }

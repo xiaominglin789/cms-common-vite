@@ -49,7 +49,7 @@ const userAvatar = computed(
 )
 
 const onTriggerMenu = () => {
-  console.log('ggggggggggggg')
+  isTriggerMenu.value = !isTriggerMenu.value
 }
 
 /** 点击退出登录 */

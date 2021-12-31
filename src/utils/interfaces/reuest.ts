@@ -1,3 +1,12 @@
+/** 枚举:常用请求方式 */
+export enum EnumMethods {
+  GET = 'GET',
+  POST = 'POST',
+  OPTIONS = 'OPTIONS',
+  PUT = 'PUT',
+  DELETE = 'DELETE'
+}
+
 /**
  * 响应格式统一
  * code: 返回的状态码: 0 代表响应成功, >0 则代表对应业务的错误状态码；
