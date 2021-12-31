@@ -162,7 +162,6 @@ service.interceptors.response.use(
           setTimeout(() => {
             AcceTokenExpireInCache.url = undefined
             userStore.logout()
-            ElMessage.warning('退出登录')
           }, 2000)
         }
       }

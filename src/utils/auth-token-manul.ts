@@ -31,6 +31,8 @@ export class AuthManualTokenExpireIn {
 
   /** 校验是否失效: true->已失效 false->未失效 */
   public static checkTokenIsExpireIn = (): boolean => {
+    if (!AuthManualTokenExpireIn.loginTime) return false
+
     const is =
       getCurrentTimeStamp() - AuthManualTokenExpireIn.loginTime >=
       AuthManualTokenExpireIn.expireInTime

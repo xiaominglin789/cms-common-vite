@@ -55,6 +55,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
           AuthManualTokenExpireIn.isOpenManua &&
             AuthManualTokenExpireIn.saveCurrentLoginTime()
 
+          ElMessage.warning('登录成功')
           router.replace(CONST_ROUTER_LOGINED_FIRST)
         } else {
           console.error('数据结构有误: ', result)
@@ -78,7 +79,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
       // localStorage
       LocalStorageHelper.clear()
       // clear permission-config
-
+      ElMessage.warning('退出登录')
       router.replace(CONST_ROUTER_LOGIN)
     }
   }

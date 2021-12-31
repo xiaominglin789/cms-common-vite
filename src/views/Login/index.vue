@@ -75,7 +75,6 @@ const onHandleLogin = () => {
   unref(loginFormRef.value).validate(async (valid: boolean) => {
     if (!valid) return
     await userStore.login(loginState.value)
-    ElMessage.success('登录成功')
   })
 }
 
