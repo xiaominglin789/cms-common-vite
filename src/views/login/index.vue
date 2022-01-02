@@ -54,7 +54,6 @@ import { validatePassword } from '@/utils/rules/rules'
 import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
 import { useUserStore } from '@/store/user'
 import { UserLoginRequest } from '@/utils/interfaces/user'
-import { ElMessage } from 'element-plus'
 
 const userStore = useUserStore()
 const loginFormRef = ref()

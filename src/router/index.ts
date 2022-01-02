@@ -1,20 +1,9 @@
 import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router'
-
-const publicRoutes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    component: () => import('@/layout/index.vue')
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login/index.vue')
-  }
-]
+import { publicRoutes, privateRoutes } from "./routes"
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: publicRoutes
+  routes: [...publicRoutes, ...privateRoutes]
 })
 
 export default router

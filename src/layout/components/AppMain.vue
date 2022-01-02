@@ -1,7 +1,6 @@
 <template>
-  <div class="com app-main">
-    app-main
-    <el-button @click="onTest">测试</el-button>
+  <div class="app-main">
+    <router-view />
   </div>
 </template>
 

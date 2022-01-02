@@ -1,5 +1,5 @@
 <template>
-  <div class="com nav-bar">
+  <div class="nav-bar">
     <div class="left-nav">
       <span class="show-menu-btn" @click="onTriggerMenu">
         <svg-icon
