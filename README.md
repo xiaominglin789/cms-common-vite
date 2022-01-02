@@ -2,7 +2,7 @@
 - vue3.2+
 - vite2.0+
 - vue-router4.0+
-- vuex4.0+
+- pinia2.0+
 - elment-plus
 
 
