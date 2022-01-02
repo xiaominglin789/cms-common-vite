@@ -1,11 +1,7 @@
 <template>
   <div class="nav-bar">
     <div class="left-nav">
-      <span class="show-menu-btn" @click="onTriggerMenu">
-        <svg-icon
-          :icon="isTriggerMenu ? 'hamburger-opened' : 'hamburger-closed'"
-        />
-      </span>
+      <side-bar-opened class="btn-side-opened"></side-bar-opened>
     </div>
     <div class="right-nav">
       <el-dropdown trigger="click">
@@ -41,6 +37,7 @@
 import { computed, ref } from 'vue'
 import { useUserStore } from '@/store/user'
 import userAvatarDefualt from '@/assets/logo.png'
+import SideBarOpened from '@/components/SideBarOpened/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
@@ -70,11 +67,14 @@ const onLogout = async () => {
   box-shadow: 0px 1px 1px #bfcbd9;
 
   .left-nav {
-    .show-menu-btn {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      @include flexRow(center, center);
+    .btn-side-opened {
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 2px;
+      transition: background-color 0.3s;
+    }
+    .btn-side-opened:hover {
+      background-color: #e3e3e3;
     }
   }
 

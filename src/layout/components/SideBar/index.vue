@@ -44,8 +44,4 @@ const menus = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-.side-bar {
-  min-height: 100vh;
-}
-</style>
+<style lang="scss" scoped></style>

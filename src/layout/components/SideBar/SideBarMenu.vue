@@ -1,5 +1,6 @@
 <template>
   <el-menu
+    :collapse="!sideBarOpenState"
     :default-active="defaultRoutePath"
     :unique-opened="true"
     background-color="#545c64"
@@ -21,16 +22,18 @@ import SideBarMenuItem from "./SideBarMenuItem.vue"
 import RouteHelper from '@/utils/routeHelper'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useSystemStore } from "@/store/system"
 
 const route = useRoute()
 const router = useRouter()
+const systemStore = useSystemStore()
 
+const sideBarOpenState = computed(() => systemStore.sideBarOpen)
 const defaultRoutePath = computed(() => route.path)
 const menus = computed(() => {
   const allRoutes = router.getRoutes()
-  const m = RouteHelper.routeToMenu(RouteHelper.filterRoutes(allRoutes))
-  console.log(m)
-  return m
+  const filterRoutes = RouteHelper.filterRoutes(allRoutes)
+  return RouteHelper.routeToMenu(filterRoutes)
 })
 </script>
 

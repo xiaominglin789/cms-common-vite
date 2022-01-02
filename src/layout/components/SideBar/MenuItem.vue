@@ -1,6 +1,6 @@
 <template>
   <!-- 渲染icon+标题 -->
-  <el-icon v-if="isElementSvgIcon" class="sub-el-icon" :class="icon"></el-icon>
+  <el-icon v-if="isElementSvgIcon" class="svg-icon" :class="icon"></el-icon>
   <svg-icon v-else :icon="icon"></svg-icon>
   <span>{{ title }}</span>
 </template>
@@ -20,7 +20,11 @@ const props = defineProps({
 })
 
 /** element-icon svg图标特定前缀: el-icon- , 否则就是本地svg图表 */
-const isElementSvgIcon = computed(() => props.icon?.includes('el-icon-'))
+const isElementSvgIcon = computed(() => props.icon?.includes('el-icon'))
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.span {
+  margin-left: 4px;
+}
+</style>

@@ -17,6 +17,7 @@ $subMenuBg: #1f2d3d;
 $subMenuHover: #001528;
 
 $sideBarWith: 210px;
+$sideBarWithHide: 64px;
 
 // scss =导出给=> js, css变量共享
 :export {
@@ -28,4 +29,5 @@ $sideBarWith: 210px;
   subMenuBg: $subMenuBg;
   subMenuHover: $subMenuHover;
   sideBarWith: $sideBarWith;
+  sideBarWithHide: $sideBarWithHide;
 }
