@@ -22,7 +22,11 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
       userInfo: <UserInformation>{}
     }
   },
-  getters: {},
+  getters: {
+    hasUserInfo() {
+      return (LocalStorageHelper.get(CONST_USER_INFO_KEY) as UserInformation) || this.userInfo
+    }
+  },
   actions: {
     /** 更新用户信息,同步到缓存 */
     updateUserInfo(info: UserInformation) {

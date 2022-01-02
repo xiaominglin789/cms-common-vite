@@ -28,8 +28,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === CONST_ROUTER_LOGIN) {
       next(CONST_ROUTER_LOGINED_FIRST)
     } else {
-      console.log(JSON.stringify(userStore.userInfo))
-      if (JSON.stringify(userStore.userInfo) === '{}') {
+      if (JSON.stringify(userStore.hasUserInfo) === '{}') {
         await userStore.getUserInfo()
       }
       next()
