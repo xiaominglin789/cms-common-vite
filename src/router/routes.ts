@@ -17,7 +17,7 @@ const publicRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/profile/index.vue'),
         meta: {
           title: '个人中心',
-          icon: 'edit'
+          icon: 'personnel'
         }
       },
       {

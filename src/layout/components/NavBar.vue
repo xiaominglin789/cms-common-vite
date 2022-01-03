@@ -4,11 +4,10 @@
       <side-bar-opened class="btn-side-opened"></side-bar-opened>
     </div>
     <div class="right-nav">
-      <el-dropdown trigger="click">
+      <el-dropdown trigger="hover">
         <div class="avatar-box">
           <!-- 圆角头像 -->
-          <el-avatar shape="square" :size="30" :src="userAvatar"></el-avatar>
-          <i></i>
+          <el-avatar shape="circle" :size="30" :src="userAvatar"></el-avatar>
         </div>
         <!-- 头像下拉菜单 -->
         <template #dropdown>
@@ -81,6 +80,7 @@ const onLogout = async () => {
   .right-nav {
     .el-avatar {
       --el-avatar-bg-color: none;
+      box-shadow: 1px 2px 4px grey;
     }
   }
 }

@@ -76,3 +76,10 @@ export const CONST_SYS_TOKEN_AUTOMATIC_RENEWAL = () => {
   }
   return false
 }
+
+/** 系统名称 */
+export const CONST_APPLICATION_NAME =
+  String(import.meta.env.VITE_APP_APPLICATION_NAME) || ''
+/** 系统远程logo */
+export const CONST_APPLICATION_WEB_LOGO =
+  String(import.meta.env.VITE_APP_APPLICATION_WEB_LOGO) || ''
