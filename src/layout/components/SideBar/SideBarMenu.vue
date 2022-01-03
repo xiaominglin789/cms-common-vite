@@ -18,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import SideBarMenuItem from "./SideBarMenuItem.vue"
+import SideBarMenuItem from './SideBarMenuItem.vue'
 import RouteHelper from '@/utils/routeHelper'
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useSystemStore } from "@/store/system"
+import { useSystemStore } from '@/store/system'
 
 const route = useRoute()
 const router = useRouter()
