@@ -1,0 +1,15 @@
+/** transition动画 */
+
+/** 面包屑 */
+.breadcrumb-enter-active,
+.breadcrumb-leave-active {
+  transition: all 0.5s;
+}
+.breadcrumb-enter-from,
+.breadcrumb-leave-active {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.breadcrumb-leave-active {
+  position: absolute;
+}

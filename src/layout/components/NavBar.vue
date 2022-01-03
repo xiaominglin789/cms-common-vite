@@ -2,6 +2,7 @@
   <div class="nav-bar">
     <div class="left-nav">
       <side-bar-opened class="btn-side-opened"></side-bar-opened>
+      <breadcrumb class="breadcrumb"></breadcrumb>
     </div>
     <div class="right-nav">
       <el-dropdown trigger="hover">
@@ -37,6 +38,7 @@ import { computed, ref } from 'vue'
 import { useUserStore } from '@/store/user'
 import userAvatarDefualt from '@/assets/logo.png'
 import SideBarOpened from '@/components/SideBarOpened/index.vue'
+import Breadcrumb from '@/components/Breadcrumb/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
@@ -66,6 +68,11 @@ const onLogout = async () => {
   box-shadow: 0px 1px 1px #bfcbd9;
 
   .left-nav {
+    display: flex;
+    align-items: center;
+    .breadcrumb {
+      margin-left: 8px;
+    }
     .btn-side-opened {
       cursor: pointer;
       padding: 2px;
