@@ -24,7 +24,7 @@ const isElementSvgIcon = computed(() => props.icon?.includes('el-icon'))
 </script>
 
 <style lang="scss" scoped>
-.span {
-  margin-left: 4px;
+span {
+  margin-left: 6px;
 }
 </style>

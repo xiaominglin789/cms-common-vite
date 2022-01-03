@@ -1,9 +1,12 @@
 <template>
-  <div class="app-wrapper" :class="sideBarOpenState?'open-sidebar':'hide-sidebar'">
+  <div
+    class="app-wrapper"
+    :class="sideBarOpenState ? 'open-sidebar' : 'hide-sidebar'"
+  >
     <!-- 左边栏 -->
     <side-bar
       class="side-container"
-      :style="{ backgroundColor: styles.menuBg }"
+      :style="{ backgroundColor: cssVars.menuBg }"
     ></side-bar>
     <div class="main-container">
       <nav-bar class="navbar-container"></nav-bar>
@@ -18,11 +21,11 @@ import { computed } from 'vue'
 import SideBar from '@/layout/components/SideBar/index.vue'
 import NavBar from '@/layout/components/NavBar.vue'
 import AppMain from '@/layout/components/AppMain.vue'
-import styles from '@/styles/variables.module.scss'
-import { useSystemStore } from "@/store/system"
+import { useSystemStore } from '@/store/system'
 
 const systemStore = useSystemStore()
 const sideBarOpenState = computed(() => systemStore.sideBarOpen)
+const cssVars = computed(() => systemStore.cssVars)
 </script>
 
 <style lang="scss" scoped>

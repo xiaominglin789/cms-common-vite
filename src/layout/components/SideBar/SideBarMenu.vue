@@ -3,9 +3,9 @@
     :collapse="!sideBarOpenState"
     :default-active="defaultRoutePath"
     :unique-opened="true"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
+    :background-color="cssVars.menuBg"
+    :text-color="cssVars.menuText"
+    :active-text-color="cssVars.menuActiveText"
     router
   >
     <!-- 根据menu渲染menu列表 -->
@@ -28,6 +28,7 @@ const route = useRoute()
 const router = useRouter()
 const systemStore = useSystemStore()
 
+const cssVars = computed(() => systemStore.cssVars)
 const sideBarOpenState = computed(() => systemStore.sideBarOpen)
 const defaultRoutePath = computed(() => route.path)
 const menus = computed(() => {
