@@ -44,7 +44,6 @@ watch(
 )
 
 const onLinkHanlder = (item: RouteLocationMatched) => {
-  console.log('切换link', item)
   router.push(item.path)
 }
 </script>
