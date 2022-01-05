@@ -6,7 +6,7 @@
     </div>
     <div class="right-nav">
       <!-- 换肤 -->
-      <app-language></app-language>
+      <app-language :size="30"></app-language>
       <!-- 头像 -->
       <el-dropdown trigger="hover">
         <div class="avatar-box">
@@ -89,6 +89,8 @@ const onLogout = async () => {
   }
 
   .right-nav {
+    display: flex;
+    gap: 10px;
     .el-avatar {
       --el-avatar-bg-color: none;
       box-shadow: 1px 2px 4px grey;

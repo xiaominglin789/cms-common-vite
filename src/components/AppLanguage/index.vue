@@ -35,7 +35,7 @@ defineProps({
   },
   size: {
     type: Number,
-    default: 30
+    default: 24
   },
   icon: {
     type: String,
