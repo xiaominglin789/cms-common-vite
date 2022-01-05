@@ -80,6 +80,10 @@ export const CONST_SYS_TOKEN_AUTOMATIC_RENEWAL = () => {
 /** 系统名称 */
 export const CONST_APPLICATION_NAME =
   String(import.meta.env.VITE_APP_APPLICATION_NAME) || ''
+
 /** 系统远程logo */
 export const CONST_APPLICATION_WEB_LOGO =
   String(import.meta.env.VITE_APP_APPLICATION_WEB_LOGO) || ''
+
+/** 系统-语言缓存key */
+export const CONST_APP_LANGUAGE_KEY = 'app-language'

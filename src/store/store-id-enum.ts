@@ -5,5 +5,6 @@
  */
 export enum EnumStoreID {
   userStore = '0',
-  systemStore = '1'
+  systemStore = '1',
+  localeStore = '2'
 }
