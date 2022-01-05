@@ -17,17 +17,17 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>
-              <router-link to="/">首页</router-link>
+              <router-link to="/">{{ $t('sys.home') }}</router-link>
             </el-dropdown-item>
             <el-dropdown-item>
               <a
                 target="__blank"
                 href="https://github.com/xiaominglin789/cms-common-vite"
-                >Github仓库</a
+                >{{ $t('sys.github') }}</a
               >
             </el-dropdown-item>
             <el-dropdown-item @click="onLogout" divided>
-              退出登录
+              {{ $t('sys.logout') }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

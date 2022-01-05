@@ -7,7 +7,7 @@
       class="login-form"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('login.title') }}</h3>
         <app-language class="language" bg-color="#fff"></app-language>
       </div>
       <!-- username -->
@@ -17,7 +17,7 @@
         </span>
         <el-input
           v-model="loginState.username"
-          placeholder="username"
+          :placeholder="$t('login.usernameTip')"
           name="username"
           type="text"
         />
@@ -30,7 +30,7 @@
         <el-input
           :type="passwordType"
           v-model="loginState.password"
-          placeholder="password"
+          :placeholder="$t('login.passwordTip')"
           name="password"
           @paste.native.capture.prevent="onStopClientCopyPasts"
           @copy.native.capture.prevent="onStopClientCopyPasts"
@@ -42,9 +42,9 @@
         </span>
       </el-form-item>
       <!-- login-btn -->
-      <el-button type="primary" class="btn-login" @click="onHandleLogin"
-        >登录</el-button
-      >
+      <el-button type="primary" class="btn-login" @click="onHandleLogin">{{
+        $t('login.submitText')
+      }}</el-button>
     </el-form>
   </div>
 </template>
@@ -56,7 +56,9 @@ import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
 import { useUserStore } from '@/store/user'
 import { UserLoginRequest } from '@/utils/interfaces/user'
 import AppLanguage from '@/components/AppLanguage/index.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const userStore = useUserStore()
 const loginFormRef = ref()
 const loginState = ref<UserLoginRequest>({
@@ -64,7 +66,13 @@ const loginState = ref<UserLoginRequest>({
   password: '123456'
 })
 const loginRules = ref({
-  username: [{ required: true, trigger: 'blur', message: '用户名必填' }],
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: t('login.usernameRuleTip')
+    }
+  ],
   password: [{ required: true, trigger: 'blur', validator: validatePassword() }]
 })
 

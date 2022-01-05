@@ -1,11 +1,37 @@
 /** 英文-项目语言数据 */
 export default {
   login: {
-    succuss: 'login succuss',
-    logout: 'logout success'
+    loginSuccuss: 'login succuss',
+    logoutSuccess: 'logout success',
+    title: 'User Login',
+    submitText: 'sign in',
+    usernameTip: 'input username',
+    passwordTip: 'input password',
+    usernameRuleTip: 'username must input',
+    passwordRuleTip: 'password must be between 6-11 digits'
   },
   language: {
-    success: 'language change success',
-    fail: 'language change fail'
+    switchSuccuss: 'language change success',
+    swithFail: 'language change fail'
+  },
+  sys: {
+    home: 'Home',
+    github: 'github',
+    logout: 'Logout'
+  },
+  route: {
+    profile: 'profile',
+    user: 'user',
+    excelImport: 'Import Excel',
+    userManage: 'user manage',
+    userInfo: 'user info',
+    roleList: 'roles',
+    permissionList: 'permissions',
+    // 业务-exp:文章
+    article: 'articles',
+    articleRanking: 'article ranking',
+    articleCreate: 'article create',
+    articleDetail: 'article detail',
+    articleEditor: 'article editor'
   }
 }

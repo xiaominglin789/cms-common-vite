@@ -50,7 +50,7 @@ const { setLanguage, msg, langsRecord } = localeStore
 const { currentLang } = storeToRefs(localeStore)
 
 const onChangeLanguage = (language: string) => {
-  setLanguage(language) && ElMessage.success(msg('language.success'))
+  setLanguage(language) && ElMessage.success(msg('language.switchSuccuss'))
 }
 </script>
 
