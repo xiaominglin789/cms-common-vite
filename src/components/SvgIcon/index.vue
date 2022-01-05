@@ -25,6 +25,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  size: {
+    type: Number,
+    default: 16
+  },
   className: {
     type: String,
     default: ''
@@ -40,13 +44,15 @@ const styleWithWebIcon = computed(() => ({
 }))
 // 内部svg样式
 const styleLocal = computed(() => `#icon-${props.icon}`)
+
+// 动态设置icon宽高
+const iconSize = computed(() => props.size + 'px')
 </script>
 
 <style lang="scss" scoped>
 .svg-icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
+  width: v-bind(iconSize);
+  height: v-bind(iconSize);
   fill: currentColor;
   overflow: hidden;
 }

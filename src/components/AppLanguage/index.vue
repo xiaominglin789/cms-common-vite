@@ -5,7 +5,7 @@
     @command="onChangeLanguage"
     trigger="click"
   >
-    <svg-icon :size="size" icon="language"></svg-icon>
+    <svg-icon :size="size" :icon="icon"></svg-icon>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
@@ -36,6 +36,10 @@ defineProps({
   size: {
     type: Number,
     default: 30
+  },
+  icon: {
+    type: String,
+    default: 'language'
   }
 })
 
