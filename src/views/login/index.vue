@@ -70,7 +70,7 @@ const loginRules = ref({
     {
       required: true,
       trigger: 'blur',
-      message: t('login.usernameRuleTip')
+      message: () => t('login.usernameRuleTip')
     }
   ],
   password: [{ required: true, trigger: 'blur', validator: validatePassword() }]
