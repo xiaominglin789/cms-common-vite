@@ -19,6 +19,7 @@ export default {
     github: 'github',
     logout: 'Logout'
   },
+  /** side菜单-title */
   route: {
     profile: 'profile',
     user: 'user',

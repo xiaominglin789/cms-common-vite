@@ -2,10 +2,11 @@
   <!-- 渲染icon+标题 -->
   <el-icon v-if="isElementSvgIcon" class="svg-icon" :class="icon"></el-icon>
   <svg-icon v-else :icon="icon"></svg-icon>
-  <span>{{ title }}</span>
+  <span>{{ title && popRouteMenuTitle(title) }}</span>
 </template>
 
 <script setup lang="ts">
+import { popRouteMenuTitle } from '@/utils/i18n'
 import { computed } from 'vue'
 
 const props = defineProps({

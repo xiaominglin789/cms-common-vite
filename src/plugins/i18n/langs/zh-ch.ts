@@ -19,6 +19,7 @@ export default {
     github: 'github仓库',
     logout: '退出登录'
   },
+  /** side菜单-title */
   route: {
     profile: '个人中心',
     user: '用户',

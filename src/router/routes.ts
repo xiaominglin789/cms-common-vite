@@ -16,7 +16,7 @@ const publicRoutes: RouteRecordRaw[] = [
         name: 'Profile',
         component: () => import('@/views/profile/index.vue'),
         meta: {
-          title: '个人中心',
+          title: 'profile',
           icon: 'personnel'
         }
       },
@@ -41,7 +41,7 @@ const privateRoutes: RouteRecordRaw[] = [
     component: () => import('@/layout/index.vue'),
     redirect: '/user/manage',
     meta: {
-      title: '用户',
+      title: 'user',
       icon: 'personnel'
     },
     children: [
@@ -50,7 +50,7 @@ const privateRoutes: RouteRecordRaw[] = [
         name: 'userManage',
         component: () => import('@/views/user-manage/index.vue'),
         meta: {
-          title: '用户管理',
+          title: 'userManage',
           icon: 'personnel'
         }
       },
@@ -59,7 +59,7 @@ const privateRoutes: RouteRecordRaw[] = [
         name: 'userRole',
         component: () => import('@/views/role-list/index.vue'),
         meta: {
-          title: '角色管理',
+          title: 'roleList',
           icon: 'role'
         }
       },
@@ -68,7 +68,7 @@ const privateRoutes: RouteRecordRaw[] = [
         name: 'userPermission',
         component: () => import('@/views/permission-list/index.vue'),
         meta: {
-          title: '权限管理',
+          title: 'permissionList',
           icon: 'personnel-manage'
         }
       },
@@ -77,7 +77,7 @@ const privateRoutes: RouteRecordRaw[] = [
         name: 'userInfo',
         component: () => import('@/views/user-info/index.vue'),
         meta: {
-          title: '用户信息'
+          title: 'userManage'
         }
       },
       {
@@ -85,7 +85,7 @@ const privateRoutes: RouteRecordRaw[] = [
         name: 'userImport',
         component: () => import('@/views/import/index.vue'),
         meta: {
-          title: '导入用户组'
+          title: 'excelImport'
         }
       }
     ]
@@ -95,7 +95,7 @@ const privateRoutes: RouteRecordRaw[] = [
     component: () => import('@/layout/index.vue'),
     redirect: '/article/ranking',
     meta: {
-      title: '临时menu文章',
+      title: 'article',
       icon: 'introduce'
     },
     children: [
@@ -104,7 +104,7 @@ const privateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/article-ranking/index.vue'),
         name: 'articleRanking',
         meta: {
-          title: '文章排行',
+          title: 'articleRanking',
           icon: 'tree'
         }
       },
@@ -113,7 +113,7 @@ const privateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/article-edit/index.vue'),
         name: 'articleEdit',
         meta: {
-          title: '修改文章'
+          title: 'articleEditor'
         }
       },
       {
@@ -121,7 +121,7 @@ const privateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/article-detail/index.vue'),
         name: 'articleDetail',
         meta: {
-          title: '文章详情'
+          title: 'articleDetail'
         }
       },
       {
@@ -129,7 +129,7 @@ const privateRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/article-create/index.vue'),
         name: 'articleCreate',
         meta: {
-          title: '新建文章',
+          title: 'articleCreate',
           icon: 'introduce'
         }
       }
