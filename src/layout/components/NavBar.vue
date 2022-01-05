@@ -5,6 +5,9 @@
       <breadcrumb class="breadcrumb"></breadcrumb>
     </div>
     <div class="right-nav">
+      <!-- 换肤 -->
+      <app-language></app-language>
+      <!-- 头像 -->
       <el-dropdown trigger="hover">
         <div class="avatar-box">
           <!-- 圆角头像 -->
@@ -39,6 +42,7 @@ import { useUserStore } from '@/store/user'
 import userAvatarDefualt from '@/assets/logo.png'
 import SideBarOpened from '@/components/SideBarOpened/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
+import AppLanguage from '@/components/AppLanguage/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)

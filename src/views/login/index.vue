@@ -8,6 +8,7 @@
     >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
+        <app-language class="language" bg-color="#fff"></app-language>
       </div>
       <!-- username -->
       <el-form-item prop="username" class="form form-username">
@@ -54,6 +55,7 @@ import { validatePassword } from '@/utils/rules/rules'
 import { usePasswordShowOrHide } from '@/hooks/usePasswordShowOrHide'
 import { useUserStore } from '@/store/user'
 import { UserLoginRequest } from '@/utils/interfaces/user'
+import AppLanguage from '@/components/AppLanguage/index.vue'
 
 const userStore = useUserStore()
 const loginFormRef = ref()
@@ -102,6 +104,11 @@ const onStopClientCopyPasts = () => {
     .title-container {
       position: relative;
       padding-bottom: 10px;
+      .language {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
       .title {
         font-size: 28px;
         font-weight: 600;

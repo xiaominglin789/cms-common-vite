@@ -1,6 +1,11 @@
 <template>
-  <el-dropdown @command="onChangeLanguage" trigger="click">
-    <svg-icon icon="language"></svg-icon>
+  <el-dropdown
+    class="app-language"
+    :style="{ 'background-color': bgColor }"
+    @command="onChangeLanguage"
+    trigger="click"
+  >
+    <svg-icon :size="size" icon="language"></svg-icon>
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item
@@ -23,6 +28,17 @@ import { useLocaleStore } from '@/store/locale'
 import { ElMessage } from 'element-plus'
 import { storeToRefs } from 'pinia'
 
+defineProps({
+  bgColor: {
+    type: String,
+    default: ''
+  },
+  size: {
+    type: Number,
+    default: 30
+  }
+})
+
 const localeStore = useLocaleStore()
 // setLanguage, msg, lang, langsRecord 方法和某些属性不需要保存响应式
 const { setLanguage, msg, langsRecord } = localeStore
@@ -34,4 +50,8 @@ const onChangeLanguage = (language: string) => {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.app-language {
+  cursor: pointer;
+}
+</style>

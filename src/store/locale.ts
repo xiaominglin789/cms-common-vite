@@ -14,7 +14,7 @@ const useLocaleStore = defineStore(EnumStoreID.localeStore, {
       /** 系统配置的语言包名<key,value> */
       langsRecord: readonly({
         'zh-cn': '中文',
-        en: 'english'
+        en: 'English'
       })
     }
   },
@@ -34,6 +34,7 @@ const useLocaleStore = defineStore(EnumStoreID.localeStore, {
       if (!Object.keys(this.langsRecord).includes(language)) return false
 
       // 更换i18的语言,本地缓存
+      this.currentLang = language
       i18n.global.locale = language
       LocalStorageHelper.set(CONST_APP_LANGUAGE_KEY, language)
 
