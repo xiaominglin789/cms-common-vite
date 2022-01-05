@@ -23,8 +23,11 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
     }
   },
   getters: {
-    hasUserInfo() {
-      return (LocalStorageHelper.get(CONST_USER_INFO_KEY) as UserInformation) || this.userInfo
+    hasUserInfo(): UserInformation {
+      return (
+        (LocalStorageHelper.get(CONST_USER_INFO_KEY) as UserInformation) ||
+        this.userInfo
+      )
     }
   },
   actions: {
