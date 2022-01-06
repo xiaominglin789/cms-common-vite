@@ -7,6 +7,8 @@
     <div class="right-nav">
       <!-- 换肤 -->
       <app-language :size="30"></app-language>
+      <!-- 全屏 -->
+      <screenfull></screenfull>
       <!-- 头像 -->
       <el-dropdown trigger="hover">
         <div class="avatar-box">
@@ -43,6 +45,7 @@ import userAvatarDefualt from '@/assets/logo.png'
 import SideBarOpened from '@/components/SideBarOpened/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import AppLanguage from '@/components/AppLanguage/index.vue'
+import Screenfull from '@/components/Screenfull/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
