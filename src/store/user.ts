@@ -13,6 +13,7 @@ import {
   CONST_ROUTER_LOGINED_FIRST
 } from '@/constant/system'
 import { AuthManualTokenExpireIn } from '@/utils/auth-token-manul'
+import { useLocaleStore } from '@/store/locale'
 
 /** user状态管理 */
 export const useUserStore = defineStore(EnumStoreID.userStore, {
@@ -62,10 +63,12 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
           AuthManualTokenExpireIn.isOpenManua &&
             AuthManualTokenExpireIn.saveCurrentLoginTime()
 
-          ElMessage.success('登录成功')
+          const { msg } = useLocaleStore()
+          ElMessage.warning(msg('login.loginSuccuss'))
+
           router.replace(CONST_ROUTER_LOGINED_FIRST)
         } else {
-          console.error('数据结构有误: ', result)
+          console.error('data structure error: ', result)
         }
       } catch (error) {}
     },
@@ -86,7 +89,9 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
       // localStorage
       LocalStorageHelper.clear()
       // clear permission-config
-      ElMessage.warning('退出登录')
+
+      const { msg } = useLocaleStore()
+      ElMessage.warning(msg('login.logoutSuccess'))
       // router.replace(CONST_ROUTER_LOGIN)
       window.location.href = CONST_ROUTER_LOGIN
     }
