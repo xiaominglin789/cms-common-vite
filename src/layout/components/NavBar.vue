@@ -6,6 +6,8 @@
     </div>
     <div class="right-nav">
       <!-- 换肤 -->
+      <dynamic-theme></dynamic-theme>
+      <!-- 国际化 -->
       <app-language :size="30"></app-language>
       <!-- 全屏 -->
       <screenfull></screenfull>
@@ -46,6 +48,7 @@ import SideBarOpened from '@/components/SideBarOpened/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import AppLanguage from '@/components/AppLanguage/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
+import DynamicTheme from '@/components/DynamicTheme/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
@@ -93,7 +96,7 @@ const onLogout = async () => {
 
   .right-nav {
     display: flex;
-    gap: 10px;
+    gap: 16px;
     .el-avatar {
       --el-avatar-bg-color: none;
       box-shadow: 1px 2px 4px grey;

@@ -87,3 +87,6 @@ export const CONST_APPLICATION_WEB_LOGO =
 
 /** 系统-语言缓存key */
 export const CONST_APP_LANGUAGE_KEY = 'app-language'
+
+/** 系统-主题色缓存key */
+export const CONST_APP_THEME_COLOR_KEY = 'app-theme-color'
