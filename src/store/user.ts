@@ -87,7 +87,8 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
       LocalStorageHelper.clear()
       // clear permission-config
       ElMessage.warning('退出登录')
-      router.replace(CONST_ROUTER_LOGIN)
+      // router.replace(CONST_ROUTER_LOGIN)
+      window.location.href = CONST_ROUTER_LOGIN
     }
   }
 })

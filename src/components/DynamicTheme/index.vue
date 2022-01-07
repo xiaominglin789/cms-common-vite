@@ -5,29 +5,31 @@
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="openDialog">
-            <span>更换主题色</span>
+            <span>{{ $t('sys.themeChangeText') }}</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
     <!-- 弹窗 -->
     <el-dialog
-      title="系统主题色"
+      :title="$t('sys.themeText')"
       v-model="opend"
       @close="closeDialog"
       :modal="true"
     >
       <!-- 取色器 -->
       <div class="color-box">
-        <span>更换主题色</span>
+        <span>{{ $t('sys.themeChangeText') }}</span>
         <el-color-picker
           v-model="selectColor"
           :predefine="predefineColors"
         ></el-color-picker>
       </div>
       <template #footer>
-        <el-button @click="closeDialog">Cancel</el-button>
-        <el-button type="primary" @click="themeColorChange">Confirm</el-button>
+        <el-button @click="closeDialog">{{ $t('sys.cancel') }}</el-button>
+        <el-button type="primary" @click="themeColorChange">{{
+          $t('sys.confirm')
+        }}</el-button>
       </template>
     </el-dialog>
   </div>
@@ -36,7 +38,6 @@
 <script setup lang="ts">
 import { useSystemStore } from '@/store/system'
 import { ref } from 'vue'
-import { generalStyle, writeNewStyle } from '@/utils/theme'
 
 defineProps({
   size: {
@@ -54,7 +55,8 @@ const opend = ref(false)
 const selectColor = ref(systemStore.themeColor)
 /** 颜色预值 */
 const predefineColors = ref([
-  '#ff4500',
+  '#2d3a4b',
+  '#409eff',
   '#ff8c00',
   '#90ee90',
   '#00ced1',
@@ -63,8 +65,7 @@ const predefineColors = ref([
   'hsv(51, 100, 98)',
   'hsva(120, 40, 94, 0.5)',
   'hsl(181, 100%, 37%)',
-  'hsla(209, 100%, 56%, 0.73)',
-  '#c7158577'
+  'hsla(209, 100%, 56%, 0.73)'
 ])
 
 /** 打开弹窗 */
@@ -78,14 +79,9 @@ const closeDialog = () => {
 /** 主题颜色切换处理 */
 const themeColorChange = async () => {
   // 完成切换逻辑
-  if (selectColor.value === systemStore.themeColor) {
-    closeDialog()
-    return
+  if (selectColor.value !== systemStore.themeColor) {
+    await systemStore.changeThemeColor(selectColor.value)
   }
-
-  const newStyle = await generalStyle(selectColor.value)
-  writeNewStyle(newStyle)
-  systemStore.saveThemeColor(selectColor.value)
   closeDialog()
 }
 </script>

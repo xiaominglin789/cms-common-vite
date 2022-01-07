@@ -3,6 +3,7 @@ import { EnumStoreID } from './store-id-enum'
 import cssVariables from '@/styles/variables.module.scss'
 import { LocalStorageHelper } from '@/utils/storage'
 import { CONST_APP_THEME_COLOR_KEY } from '@/constant/system'
+import { generalStyle, writeNewStyle } from '@/utils/theme'
 
 /** 系统配置状态*/
 export const useSystemStore = defineStore(EnumStoreID.systemStore, {
@@ -21,8 +22,17 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
     triggerSideBarOpened() {
       this.sideBarOpen = !this.sideBarOpen
     },
-    /** 缓存默认主题色 */
-    saveThemeColor(color: string) {
+    /** 修改主题色 */
+    async changeThemeColor(color: string) {
+      if (!color) return
+      // 修改element-plus的主题色
+      const newStyle = await generalStyle(color)
+      writeNewStyle(newStyle)
+
+      // 更换自定义的主题色
+      this.cssVars.menuBg = color
+
+      // 更新缓存
       this.themeColor = color
       LocalStorageHelper.set(CONST_APP_THEME_COLOR_KEY, color)
     }

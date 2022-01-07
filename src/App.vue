@@ -7,8 +7,13 @@
 <script setup lang="ts">
 import { ElConfigProvider } from 'element-plus'
 import { useLocaleStore } from '@/store/locale'
+import { useSystemStore } from '@/store/system'
 
 const localeStore = useLocaleStore()
+const systemStore = useSystemStore()
+
+// 初始化-样式、配置
+systemStore.changeThemeColor(systemStore.themeColor)
 </script>
 
 <style>

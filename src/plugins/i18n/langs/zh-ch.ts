@@ -17,7 +17,11 @@ export default {
   sys: {
     home: '首页',
     github: 'github仓库',
-    logout: '退出登录'
+    logout: '退出登录',
+    cancel: '取消',
+    confirm: '确定',
+    themeText: '系统主题色',
+    themeChangeText: '更换主题色'
   },
   /** side菜单-title */
   route: {

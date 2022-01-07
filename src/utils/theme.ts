@@ -2,8 +2,11 @@ import rgbHex from 'rgb-hex'
 import colorFunc from 'css-color-function'
 
 /**
- * 自定义主题色 + element主题色替换表
- * 可自由拓展需要整体更换的自定义css变量
+ * 该文件:主要动态替换element-plus的主题色
+ */
+
+/**
+ * element主题色替换表
  * color(primary shade(10%))
  *   primary 主色替换占位
  *   shade(x) 主色加黑,x:0-9
@@ -19,17 +22,13 @@ const fornums = {
   'light-6': 'color(primary tint(60%))',
   'light-7': 'color(primary tint(70%))',
   'light-8': 'color(primary tint(80%))',
-  'light-9': 'color(primary tint(90%))',
-  subMenuHover: 'color(primary tint(70%))',
-  subMenuBg: 'color(primary tint(80%))',
-  menuHover: 'color(primary tint(90%))',
-  menuBg: 'color(primary)'
+  'light-9': 'color(primary tint(90%))'
 }
 
 // elemtn-plus 默认默认主题色值
 const elColorMap = {
   '#3a8ee6': 'shade-1',
-  '#409eff': 'primay',
+  '#409eff': 'primary',
   '#53a8ff': 'light-1',
   '#66b1ff': 'light-2',
   '#79bbff': 'light-3',

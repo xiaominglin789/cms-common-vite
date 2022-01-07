@@ -17,7 +17,11 @@ export default {
   sys: {
     home: 'Home',
     github: 'github',
-    logout: 'Logout'
+    logout: 'Logout',
+    cancel: 'cancel',
+    confirm: 'confirm',
+    themeText: 'theme color',
+    themeChangeText: 'change theme'
   },
   /** side菜单-title */
   route: {
