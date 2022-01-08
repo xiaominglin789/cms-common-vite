@@ -37,7 +37,7 @@ export class RouteHelper {
    * @param routes 过滤后的路由表
    */
   public static routeToMenu(routes: RouteRecordRaw[], basePath = '') {
-    const result = <any[]>[]
+    const result = <RouteRecordRaw[]>[]
 
     routes.forEach((item) => {
       // [children 不存在, mete不存在, return]
@@ -58,7 +58,9 @@ export class RouteHelper {
       routePath = routePath.replace(basePath, '')
 
       // 判断是否当前路由是否以及保存进menu数组中
-      let route: any = result.find((item) => item.path === routePath)
+      let route: RouteRecordRaw | any = result.find(
+        (item) => item.path === routePath
+      )
       if (!route) {
         // 构建menu项结构
         route = {
