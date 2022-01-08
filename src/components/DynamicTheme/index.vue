@@ -52,7 +52,7 @@ defineProps({
 
 const systemStore = useSystemStore()
 const opend = ref(false)
-const selectColor = ref(systemStore.themeColor)
+const selectColor = ref(systemStore.themeColor || '')
 /** 颜色预值 */
 const predefineColors = ref([
   '#2d3a4b',

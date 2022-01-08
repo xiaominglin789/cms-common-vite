@@ -1,6 +1,6 @@
 import rgbHex from 'rgb-hex'
 import colorFunc from 'css-color-function'
-
+import elementResult from 'element-plus/dist/index.css'
 /**
  * 该文件:主要动态替换element-plus的主题色
  */
@@ -63,7 +63,7 @@ export const generalStyle = async (mainColor: string) => {
   // 4.返回得到最新的样式表
   const colors = generalColors(mainColor)
 
-  const elementStyle = (await import('element-plus/dist/index.css')).default
+  const elementStyle = elementResult
   let cssText = styleReplaceTag(elementStyle)
 
   // exp: --color-el-primary: [primay] -> colors['primary] = #xxxx
@@ -73,7 +73,6 @@ export const generalStyle = async (mainColor: string) => {
       '$1' + colors[key]
     )
   })
-
   return cssText
 }
 

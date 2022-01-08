@@ -8,12 +8,16 @@
 import { ElConfigProvider } from 'element-plus'
 import { useLocaleStore } from '@/store/locale'
 import { useSystemStore } from '@/store/system'
+import { onBeforeMount } from 'vue'
 
 const localeStore = useLocaleStore()
 const systemStore = useSystemStore()
 
-// 初始化-样式、配置
-systemStore.changeThemeColor(systemStore.themeColor)
+onBeforeMount(async () => {
+  // 初始化工作
+  // 样式、配置
+  await systemStore.changeThemeColor(systemStore.themeColor)
+})
 </script>
 
 <style>

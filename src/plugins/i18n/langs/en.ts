@@ -1,7 +1,7 @@
 /** 英文-项目语言数据 */
 export default {
   login: {
-    loginSuccuss: 'login succuss',
+    loginSuccess: 'login succuss',
     logoutSuccess: 'logout success',
     title: 'User Login',
     submitText: 'sign in',

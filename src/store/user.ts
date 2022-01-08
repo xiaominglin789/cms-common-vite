@@ -64,7 +64,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
             AuthManualTokenExpireIn.saveCurrentLoginTime()
 
           const { msg } = useLocaleStore()
-          ElMessage.warning(msg('login.loginSuccuss'))
+          ElMessage.warning(msg('login.loginSuccess'))
 
           router.replace(CONST_ROUTER_LOGINED_FIRST)
         } else {
@@ -92,8 +92,9 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
 
       const { msg } = useLocaleStore()
       ElMessage.warning(msg('login.logoutSuccess'))
-      // router.replace(CONST_ROUTER_LOGIN)
-      window.location.href = CONST_ROUTER_LOGIN
+
+      router.replace(CONST_ROUTER_LOGIN)
+      window.location.reload()
     }
   }
 })
