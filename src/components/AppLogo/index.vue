@@ -43,6 +43,7 @@ const avatarWidth = computed(() => props.size + 10 + 'px')
   width: 100%;
   height: 60px;
   display: flex;
+  cursor: pointer;
   .logo-avatar {
     flex: 0 0 v-bind(avatarWidth);
     display: flex;

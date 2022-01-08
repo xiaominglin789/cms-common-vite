@@ -55,6 +55,7 @@ const onLinkHanlder = (item: RouteLocationMatched) => {
 .breadcrumb-container {
   display: inline-block;
   font-size: 14px;
+  cursor: pointer;
   .redirect {
     color: #666;
     font-weight: 600;

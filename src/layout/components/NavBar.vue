@@ -5,14 +5,16 @@
       <breadcrumb class="breadcrumb"></breadcrumb>
     </div>
     <div class="right-nav">
+      <!-- 页面搜索 -->
+      <header-search class="right-nav-item"></header-search>
       <!-- 换肤 -->
-      <dynamic-theme></dynamic-theme>
+      <dynamic-theme class="right-nav-item"></dynamic-theme>
       <!-- 国际化 -->
-      <app-language :size="30"></app-language>
+      <app-language class="right-nav-item"></app-language>
       <!-- 全屏 -->
-      <screenfull></screenfull>
+      <screenfull class="right-nav-item"></screenfull>
       <!-- 头像 -->
-      <el-dropdown trigger="hover">
+      <el-dropdown trigger="hover" class="right-nav-item">
         <div class="avatar-box">
           <!-- 圆角头像 -->
           <el-avatar shape="circle" :size="30" :src="userAvatar"></el-avatar>
@@ -49,6 +51,7 @@ import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import AppLanguage from '@/components/AppLanguage/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import DynamicTheme from '@/components/DynamicTheme/index.vue'
+import HeaderSearch from '@/components/HeaderSearch/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
@@ -97,9 +100,22 @@ const onLogout = async () => {
   .right-nav {
     display: flex;
     gap: 16px;
-    .el-avatar {
-      --el-avatar-bg-color: none;
-      box-shadow: 1px 2px 4px grey;
+    align-items: center;
+    .right-nav-item {
+      transition: all 0.3s;
+    }
+    .right-nav-item:hover {
+      opacity: 0.9;
+      :deep(.svg-icon) {
+        transform: scale(0.9);
+      }
+    }
+    .avatar-box {
+      cursor: pointer;
+      .el-avatar {
+        --el-avatar-bg-color: none;
+        box-shadow: 1px 2px 4px grey;
+      }
     }
   }
 }

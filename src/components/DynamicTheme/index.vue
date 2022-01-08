@@ -16,6 +16,7 @@
       v-model="opend"
       @close="closeDialog"
       :modal="true"
+      width="20%"
     >
       <!-- 取色器 -->
       <div class="color-box">
@@ -88,7 +89,7 @@ const themeColorChange = async () => {
 
 <style lang="scss" scoped>
 .dynamic-theme {
-  width: 20%;
+  cursor: pointer;
   :deep(.color-box) {
     display: flex;
     align-items: center;
