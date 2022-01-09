@@ -21,7 +21,8 @@ export default {
     cancel: '取消',
     confirm: '确定',
     themeText: '系统主题色',
-    themeChangeText: '更换主题色'
+    themeChangeText: '更换主题色',
+    menuFuseTip: '快速检索菜单'
   },
   /** side菜单-title */
   route: {

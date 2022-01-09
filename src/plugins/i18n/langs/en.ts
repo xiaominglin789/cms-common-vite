@@ -21,7 +21,8 @@ export default {
     cancel: 'cancel',
     confirm: 'confirm',
     themeText: 'theme color',
-    themeChangeText: 'change theme'
+    themeChangeText: 'change theme color',
+    menuFuseTip: 'Quick search menu'
   },
   /** side菜单-title */
   route: {

@@ -6,9 +6,11 @@ import {
   FuseSearchResultDataType
 } from './interfaces/fuse'
 
-/** 页面-模糊搜索工具类 */
-class FuseHelper {
-  private static instace: FuseHelper
+/**
+ * 页面路由菜单-模糊搜索工具类
+ * - 需要具备刷新的功能,只能new
+ */
+class FuseHandler {
   private fuseOptions: Fuse.IFuseOptions<any> = {
     /** 是否安装优先级今夕排序 */
     shouldSort: true,
@@ -29,7 +31,7 @@ class FuseHelper {
   private fuseObj!: Fuse<FuseSearchPoolDataType>
   private localStore = useLocaleStore()
 
-  private constructor(routeMenus: RouteRecordRaw[]) {
+  constructor(routeMenus: RouteRecordRaw[]) {
     const list = this.routeMenusProcessed(routeMenus)
     console.log(list)
 
@@ -79,21 +81,13 @@ class FuseHelper {
     return res
   }
 
-  public static getInstance(routeMenus: any) {
-    if (!this.instace) {
-      this.instace = new FuseHelper(routeMenus)
-    }
-
-    return this.instace
-  }
-
   /**
    * 模糊搜索
-   * @param query
+   * @param query 关键字_字符串
    */
   public search(query: string): FuseSearchResultDataType[] {
     return this.fuseObj.search(query)
   }
 }
 
-export default FuseHelper
+export default FuseHandler
