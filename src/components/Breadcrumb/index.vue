@@ -10,11 +10,11 @@
           <span
             v-if="index === breadcrumbArray.length - 1"
             class="no-redirect"
-            >{{ popRouteMenuTitle(child.meta.title as string) }}</span
+            >{{ generalRouteMenuTitle(child.meta.title as string) }}</span
           >
           <!-- 可点击,触发class动画 -->
           <span v-else class="redirect" @click="onLinkHanlder(child)">
-            {{ popRouteMenuTitle(child.meta.title as string) }}
+            {{ generalRouteMenuTitle(child.meta.title as string) }}
           </span>
         </el-breadcrumb-item>
       </transition-group>
@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { popRouteMenuTitle } from '@/utils/i18n'
+import { generalRouteMenuTitle } from '@/utils/i18n'
 import { watch, ref } from 'vue'
 import { RouteLocationMatched, useRoute, useRouter } from 'vue-router'
 

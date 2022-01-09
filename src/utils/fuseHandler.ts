@@ -1,10 +1,10 @@
 import Fuse from 'fuse.js'
 import type { RouteRecordRaw } from 'vue-router'
-import { useLocaleStore } from '@/store/locale'
 import {
   FuseSearchPoolDataType,
   FuseSearchResultDataType
 } from './interfaces/fuse'
+import { generalRouteMenuTitle } from '@/utils/i18n'
 
 /**
  * 页面路由菜单-模糊搜索工具类
@@ -29,11 +29,10 @@ class FuseHandler {
     ]
   }
   private fuseObj!: Fuse<FuseSearchPoolDataType>
-  private localStore = useLocaleStore()
 
   constructor(routeMenus: RouteRecordRaw[]) {
     const list = this.routeMenusProcessed(routeMenus)
-    console.log(list)
+    // console.log(list)
 
     this.fuseObj = new Fuse<FuseSearchPoolDataType>(list, this.fuseOptions)
   }
@@ -60,7 +59,7 @@ class FuseHandler {
       // 2.动态路由不允许被检索: regexp: /.*:.*/
       const reg = /.*:.*/
       if (menu.meta && menu.meta.title && !reg.exec(menu.path)) {
-        const i18nTitle = this.localStore.msg(`route.${menu.meta.title}`)
+        const i18nTitle = generalRouteMenuTitle(menu.meta.title + '')
         data.title = [...data.title, i18nTitle]
         res.push(data)
       }

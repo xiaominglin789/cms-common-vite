@@ -64,7 +64,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
             AuthManualTokenExpireIn.saveCurrentLoginTime()
 
           const { msg } = useLocaleStore()
-          ElMessage.warning(msg('login.loginSuccess'))
+          ElMessage.success(msg('login.loginSuccess'))
 
           router.replace(CONST_ROUTER_LOGINED_FIRST)
         } else {
