@@ -5,6 +5,8 @@
       <breadcrumb class="breadcrumb"></breadcrumb>
     </div>
     <div class="right-nav">
+      <!-- 页面引导 -->
+      <app-guide class="right-nav-item"></app-guide>
       <!-- 页面搜索 -->
       <header-search class="right-nav-item"></header-search>
       <!-- 换肤 -->
@@ -52,6 +54,7 @@ import AppLanguage from '@/components/AppLanguage/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
 import DynamicTheme from '@/components/DynamicTheme/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import AppGuide from '@/components/AppGuide/index.vue'
 
 const userStore = useUserStore()
 const isTriggerMenu = ref(true)
@@ -102,6 +105,7 @@ const onLogout = async () => {
     gap: 16px;
     align-items: center;
     .right-nav-item {
+      cursor: pointer;
       transition: all 0.3s;
     }
     .right-nav-item:hover {

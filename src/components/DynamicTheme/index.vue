@@ -89,7 +89,6 @@ const themeColorChange = async () => {
 
 <style lang="scss" scoped>
 .dynamic-theme {
-  cursor: pointer;
   :deep(.color-box) {
     display: flex;
     align-items: center;

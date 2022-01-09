@@ -26,8 +26,4 @@ const onToggleScreen = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.screen-full {
-  cursor: pointer;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -24,6 +24,24 @@ export default {
     themeChangeText: '更换主题色',
     menuFuseTip: '快速检索菜单'
   },
+  guide: {
+    content: '页面功能向导',
+    title: '引导',
+    close: '关闭',
+    next: '下一个',
+    prev: '上一个',
+    guideStart: '功能引导开始',
+    menuTitle: '菜单区',
+    menuDes: '系统功能菜单列表',
+    screenfullTitle: '页面最大化',
+    screenfullDes: '页面最大化',
+    menuSearchTitle: '快速检索菜单',
+    menuSearchDes: '你可以在这里通过搜索快速找到你想要的页面菜单模块',
+    themeTitle: '主题色切换',
+    themeDes: '可以任意更换你想要的主题色',
+    languageTitle: '语言切换',
+    languageDes: '切换系统语言'
+  },
   /** side菜单-title */
   route: {
     profile: '个人中心',

@@ -54,8 +54,4 @@ const onChangeLanguage = (language: string) => {
 }
 </script>
 
-<style lang="scss" scoped>
-.app-language {
-  cursor: pointer;
-}
-</style>
+<style lang="scss" scoped></style>

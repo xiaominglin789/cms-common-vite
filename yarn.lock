@@ -1513,6 +1513,11 @@ dot-prop@^5.1.0:
   dependencies:
     is-obj "^2.0.0"
 
+driver.js@^0.9.8:
+  version "0.9.8"
+  resolved "https://registry.npm.taobao.org/driver.js/download/driver.js-0.9.8.tgz#4b327f4537b1c9b9fb19419de86174be821ae32a"
+  integrity sha1-SzJ/RTexybn7GUGd6GF0voIa4yo=
+
 editor@1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/editor/download/editor-1.0.0.tgz"

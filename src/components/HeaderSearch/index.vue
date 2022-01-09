@@ -129,7 +129,6 @@ watch(
 @import '@/styles/mixin.scss';
 
 .header-search {
-  cursor: pointer;
   width: 100%;
   @include flexRow(center, center);
   .search-select {

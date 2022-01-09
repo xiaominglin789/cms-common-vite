@@ -24,6 +24,25 @@ export default {
     themeChangeText: 'change theme color',
     menuFuseTip: 'Quick search menu'
   },
+  guide: {
+    content: 'page guide',
+    title: 'guide',
+    close: 'closed',
+    next: 'next',
+    prev: 'prev',
+    guideStart: 'guide start',
+    menuTitle: 'menu',
+    menuDes: 'Page menu function list',
+    screenfullTitle: 'screenfull',
+    screenfullDes: 'It can help you maximize your page',
+    menuSearchTitle: 'Menu retrieval',
+    menuSearchDes:
+      'Menu retrieval can help you quickly find the page functions you want',
+    themeTitle: 'theme change',
+    themeDes: 'Dynamically switch theme colors',
+    languageTitle: 'language',
+    languageDes: 'Switch system language'
+  },
   /** side菜单-title */
   route: {
     profile: 'profile',
