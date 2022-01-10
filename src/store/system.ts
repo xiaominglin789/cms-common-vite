@@ -2,8 +2,12 @@ import { defineStore } from 'pinia'
 import { EnumStoreID } from './store-id-enum'
 import cssVariables from '@/styles/variables.module.scss'
 import { LocalStorageHelper } from '@/utils/storage'
-import { CONST_APP_THEME_COLOR_KEY } from '@/constant/system'
+import {
+  CONST_APP_TAGS_VIEW,
+  CONST_APP_THEME_COLOR_KEY
+} from '@/constant/system'
 import { generalStyle, writeNewStyle } from '@/utils/theme'
+import { TagsViewType } from '@/utils/interfaces/tag'
 
 /** 系统配置状态*/
 export const useSystemStore = defineStore(EnumStoreID.systemStore, {
@@ -14,7 +18,12 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
       /** scss-module-动态属性js访问: cssVars.xxx */
       cssVars: cssVariables,
       /** 默认主题色 */
-      themeColor: LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) || '#409eff'
+      themeColor:
+        LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) || '#409eff',
+      /** tagsView记录 */
+      tagsViewRecord:
+        (LocalStorageHelper.get(CONST_APP_TAGS_VIEW) as TagsViewType[]) ||
+        <TagsViewType[]>[]
     }
   },
   actions: {
@@ -35,6 +44,20 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
       // 更新缓存
       this.themeColor = color
       LocalStorageHelper.set(CONST_APP_THEME_COLOR_KEY, color)
+    },
+    /** 添加 tags 路由标签导航记录 */
+    addTagsViewRecord(tag: TagsViewType) {
+      // 数组去重
+      const has = this.tagsViewRecord.find((item: TagsViewType) => {
+        return item.path === tag.path
+      })
+
+      // 不存在,保存
+      if (!has) {
+        this.tagsViewRecord.push(tag)
+        // 更新本地缓存
+        LocalStorageHelper.set(CONST_APP_TAGS_VIEW, this.tagsViewRecord)
+      }
     }
   }
 })

@@ -1,15 +1,13 @@
 <template>
   <div class="app-main">
+    <!-- tags -->
+    <TagsView></TagsView>
     <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
-// test
-
-const onTest = async () => {
-  console.log('测试按钮点击')
-}
+import TagsView from '@/components/TagsView/index.vue'
 </script>
 
 <style lang="scss" scoped>

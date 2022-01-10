@@ -102,27 +102,21 @@ const closedSelectContent = () => {
 }
 
 /** 监听页面点击,关闭搜索面板,清空搜索结果 */
-watch(
-  () => isShowSearch.value,
-  (val) => {
-    nextTick(() => {
-      if (val) {
-        searchSelectRef.value.focus()
-        document.body.addEventListener('click', closedSelectContent)
-      } else {
-        document.body.removeEventListener('click', closedSelectContent)
-      }
-    })
-  }
-)
+watch(isShowSearch, (val) => {
+  nextTick(() => {
+    if (val) {
+      searchSelectRef.value.focus()
+      document.body.addEventListener('click', closedSelectContent)
+    } else {
+      document.body.removeEventListener('click', closedSelectContent)
+    }
+  })
+})
 
 /** 监听语言切换,模糊搜索重新初始化 */
-watch(
-  () => i18n.locale.value,
-  (val) => {
-    initFuseSearchClass()
-  }
-)
+watch(i18n.locale, (val) => {
+  initFuseSearchClass()
+})
 </script>
 
 <style lang="scss" scoped>

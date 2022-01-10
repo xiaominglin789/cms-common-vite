@@ -90,3 +90,6 @@ export const CONST_APP_LANGUAGE_KEY = 'app-language'
 
 /** 系统-主题色缓存key */
 export const CONST_APP_THEME_COLOR_KEY = 'app-theme-color'
+
+/** 系统-tagsView 缓存key */
+export const CONST_APP_TAGS_VIEW = 'app-tags-view'
