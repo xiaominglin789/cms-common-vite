@@ -35,6 +35,7 @@ import {
 import { useI18n } from 'vue-i18n'
 import routeHelper from '@/utils/routeHelper'
 import FuseHandler from '@/utils/fuseHandler'
+import { languageSwitchMonitor } from '@/utils/i18n'
 
 defineProps({
   size: {
@@ -93,12 +94,14 @@ const onSelectChange = () => {
 
 /** 关闭搜索 */
 const closedSelectContent = () => {
-  nextTick(() => {
+  try {
     searchSelectRef.value.blur()
     isShowSearch.value = false
     searchOptions.value = []
     searchValue.value = undefined
-  })
+  } catch (e) {
+    console.error(e)
+  }
 }
 
 /** 监听页面点击,关闭搜索面板,清空搜索结果 */
@@ -114,9 +117,7 @@ watch(isShowSearch, (val) => {
 })
 
 /** 监听语言切换,模糊搜索重新初始化 */
-watch(i18n.locale, (val) => {
-  initFuseSearchClass()
-})
+languageSwitchMonitor(initFuseSearchClass)
 </script>
 
 <style lang="scss" scoped>
