@@ -13,13 +13,14 @@ import { TagsViewType } from '@/utils/interfaces/tag'
 export const useSystemStore = defineStore(EnumStoreID.systemStore, {
   state: () => {
     return {
+      /** 头部导航是否开启fixed定位 */
+      headerFixed: true,
       /** 侧边栏menu显示隐藏开关 */
       sideBarOpen: true,
       /** scss-module-动态属性js访问: cssVars.xxx */
       cssVars: cssVariables,
       /** 默认主题色 */
-      themeColor:
-        LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) || '#409eff',
+      themeColor: LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) || '',
       /** tagsView记录 */
       tagsViewRecord:
         (LocalStorageHelper.get(CONST_APP_TAGS_VIEW) as TagsViewType[]) ||

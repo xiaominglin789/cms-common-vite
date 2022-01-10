@@ -76,13 +76,12 @@ const onLogout = async () => {
 @import '@/styles/mixin.scss';
 
 .nav-bar {
-  @include flexRow(space-between, center);
   width: 100%;
   height: 60px;
   overflow: hidden;
   padding: 0 16px 0 4px;
   box-shadow: 0px 1px 1px #bfcbd9;
-
+  @include flexRow(space-between, center);
   .left-nav {
     display: flex;
     align-items: center;

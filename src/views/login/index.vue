@@ -97,7 +97,6 @@ const onStopClientCopyPasts = () => {
 @import '@/styles/variables.module.scss';
 
 .login-container {
-  min-height: 100vh;
   width: 100%;
   background-color: $app-bg;
   overflow: hidden;

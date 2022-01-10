@@ -92,8 +92,33 @@ languageSwitchMonitor(() => {
 
 <style lang="scss" scoped>
 .tags-view {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 10px;
+  box-shadow: 0 1px 2px grey;
   .tags-view-item {
+    width: auto;
+    height: 28px;
+    border: 1px solid blue;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    span {
+      margin-right: 4px;
+    }
     .el-icon-close {
+      width: 8px;
+      height: 8px;
+      border: 1px solid blue;
+      border-radius: 50%;
+      display: inline-block;
     }
     &.active {
       color: red;

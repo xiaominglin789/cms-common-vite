@@ -8,18 +8,14 @@
       class="side-container"
       :style="{ backgroundColor: cssVars.menuBg }"
     ></side-bar>
-    <div class="main-container">
-      <nav-bar class="navbar-container"></nav-bar>
-      <!-- 内容栏 -->
-      <app-main class="appmain-container"></app-main>
-    </div>
+    <!-- 内容区 -->
+    <app-main></app-main>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 import SideBar from '@/layout/components/SideBar/index.vue'
-import NavBar from '@/layout/components/NavBar.vue'
 import AppMain from '@/layout/components/AppMain.vue'
 import { useSystemStore } from '@/store/system'
 
@@ -35,28 +31,18 @@ const cssVars = computed(() => systemStore.cssVars)
 .app-wrapper {
   @include relative;
   display: flex;
-  .side-container {
-    width: #{$sideBarWith};
+  flex-direction: row;
+  .appmain-container {
+    flex: 1;
   }
-  .main-container {
-    .navbar-container {
-      position: fixed;
-      top: 0;
-      z-index: 999;
-      width: calc(100% - #{$sideBarWith});
-      transition: width 1s;
-    }
-    .appmain-container {
+  &.open-sidebar {
+    .side-container {
+      flex: 0 0 #{$sideBarWith};
     }
   }
-}
-.hide-sidebar {
-  .side-container {
-    width: #{$sideBarWithHide};
-  }
-  .main-container {
-    .navbar-container {
-      width: calc(100% - #{$sideBarWithHide});
+  &.hide-sidebar {
+    .side-container {
+      flex: 0 0 #{$sideBarWithHide};
     }
   }
 }
