@@ -24,6 +24,7 @@ $transitionTime_30: 0.3s;
 
 // scss =导出给=> js, css变量共享
 :export {
+  app-bg: $app-bg;
   menuBg: $menuBg;
   menuHover: $menuHover;
   menuText: $menuText;

@@ -15,8 +15,7 @@ const radio1 = ref(false)
 const systemStore = useSystemStore()
 
 const ontest = () => {
-  systemStore.headerFixed = !systemStore.headerFixed
-  console.log(systemStore.headerFixed)
+  console.log(systemStore.headerFixedOpen)
 }
 </script>
 

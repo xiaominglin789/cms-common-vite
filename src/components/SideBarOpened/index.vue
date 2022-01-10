@@ -6,12 +6,13 @@
 
 <script setup lang="ts">
 import { useSystemStore } from '@/store/system'
+import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 
 const systemStore = useSystemStore()
-
+const { sideBarOpen } = storeToRefs(systemStore)
 const svgIconName = computed(() =>
-  systemStore.sideBarOpen ? 'hamburger-opened' : 'hamburger-closed'
+  sideBarOpen ? 'hamburger-opened' : 'hamburger-closed'
 )
 
 const onChange = () => {

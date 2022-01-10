@@ -1,0 +1,22 @@
+/* 深色模式样式 */
+[data-theme='dark'] {
+  // 全局
+  filter: invert(0.9) hue-rotate(180deg);
+  img,
+  .layout-lock-screen-img,
+  .visualizing-demo2,
+  .w-e-panel-tab-content {
+    filter: invert(1) hue-rotate(180deg);
+  }
+  .error img {
+    filter: unset;
+  }
+
+  // element plus
+
+  // 其他第三方组件
+
+  // 自定义样式改写-要加 !important
+  .app-wrapper {
+  }
+}

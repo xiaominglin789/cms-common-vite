@@ -15,20 +15,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import TagsView from '@/components/TagsView/index.vue'
 import NavBar from '@/layout/components/NavBar.vue'
 import { useSystemStore } from '@/store/system'
+import { storeToRefs } from 'pinia'
 
 const systemStore = useSystemStore()
-const headerFixed = computed(() => systemStore.headerFixed)
-const headerFixedLeft = computed(() => {
-  let _left = '0px'
-  _left = systemStore.sideBarOpen
-    ? systemStore.cssVars.sideBarWith
-    : systemStore.cssVars.sideBarWithHide
-  return _left
-})
+const { headerFixedLeftPosition, headerFixedOpen: headerFixed } =
+  storeToRefs(systemStore)
 </script>
 
 <style lang="scss" scoped>
@@ -49,10 +43,10 @@ const headerFixedLeft = computed(() => {
 
   &.app-header-fixed {
     .app-header {
-      width: calc(100% - v-bind(headerFixedLeft));
+      width: calc(100% - v-bind(headerFixedLeftPosition));
       position: fixed;
       top: 0;
-      left: v-bind(headerFixedLeft);
+      left: v-bind(headerFixedLeftPosition);
       z-index: 999;
     }
     .app-view {

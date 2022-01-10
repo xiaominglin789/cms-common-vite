@@ -37,12 +37,12 @@ const cssVars = computed(() => systemStore.cssVars)
   }
   &.open-sidebar {
     .side-container {
-      flex: 0 0 #{$sideBarWith};
+      flex: 0 0 $sideBarWith;
     }
   }
   &.hide-sidebar {
     .side-container {
-      flex: 0 0 #{$sideBarWithHide};
+      flex: 0 0 $sideBarWithHide;
     }
   }
 }

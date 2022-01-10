@@ -9,6 +9,11 @@ import { ElConfigProvider } from 'element-plus'
 import { useLocaleStore } from '@/store/locale'
 import { useSystemStore } from '@/store/system'
 import { onBeforeMount } from 'vue'
+import { LocalStorageHelper } from './utils/storage'
+import {
+  CONST_APP_HEADER_FIXED_OPEN,
+  CONST_APP_SIDE_BAR_OPEN
+} from './constant/config'
 
 const localeStore = useLocaleStore()
 const systemStore = useSystemStore()
@@ -16,7 +21,7 @@ const systemStore = useSystemStore()
 onBeforeMount(async () => {
   // 初始化工作
   // 样式、配置
-  await systemStore.changeThemeColor(systemStore.themeColor)
+  await systemStore.systemConfigInit()
 })
 </script>
 

@@ -6,6 +6,11 @@ import {
   CONST_APP_TAGS_VIEW,
   CONST_APP_THEME_COLOR_KEY
 } from '@/constant/system'
+import {
+  CONST_APP_DARK_MODE_OPEN,
+  CONST_APP_HEADER_FIXED_OPEN,
+  CONST_APP_SIDE_BAR_OPEN
+} from '@/constant/config'
 import { generalStyle, writeNewStyle } from '@/utils/theme'
 import { TagsViewType } from '@/utils/interfaces/tag'
 
@@ -13,24 +18,73 @@ import { TagsViewType } from '@/utils/interfaces/tag'
 export const useSystemStore = defineStore(EnumStoreID.systemStore, {
   state: () => {
     return {
-      /** 头部导航是否开启fixed定位 */
-      headerFixed: true,
+      /** 是否开启黑夜模式 */
+      darkModeOpen: false,
+      /** 是否开启头部导航fixed定位 */
+      headerFixedOpen: true,
       /** 侧边栏menu显示隐藏开关 */
       sideBarOpen: true,
       /** scss-module-动态属性js访问: cssVars.xxx */
       cssVars: cssVariables,
       /** 默认主题色 */
-      themeColor: LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) || '',
+      themeColor: '',
       /** tagsView记录 */
       tagsViewRecord:
         (LocalStorageHelper.get(CONST_APP_TAGS_VIEW) as TagsViewType[]) ||
         <TagsViewType[]>[]
     }
   },
+  getters: {
+    headerFixedLeftPosition(): string {
+      let _left = '0px'
+      if (this.headerFixedOpen && this.sideBarOpen) {
+        _left = this.cssVars.sideBarWith
+      }
+      if (this.headerFixedOpen && !this.sideBarOpen) {
+        _left = this.cssVars.sideBarWithHide
+      }
+      return _left
+    }
+  },
   actions: {
+    /** 配置初始化-用在App入口查询本地缓存初始化 */
+    async systemConfigInit() {
+      this.darkModeOpen =
+        LocalStorageHelper.get(CONST_APP_DARK_MODE_OPEN) === true ? true : false
+      this.headerFixedOpen =
+        LocalStorageHelper.get(CONST_APP_HEADER_FIXED_OPEN) === true
+          ? true
+          : false
+      this.sideBarOpen =
+        LocalStorageHelper.get(CONST_APP_SIDE_BAR_OPEN) === true ||
+        LocalStorageHelper.get(CONST_APP_SIDE_BAR_OPEN) === null
+          ? true
+          : false
+      this.themeColor =
+        LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) === null
+          ? ''
+          : LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY)
+
+      // 初始化主题色
+      await this.changeThemeColor(this.themeColor)
+      // 初始化黑夜模式状态
+      this.changeDarkMode(this.darkModeOpen)
+    },
+    /** 触发-是否开启黑夜模式 */
+    triggerDarkModeOpend() {
+      this.darkModeOpen = !this.darkModeOpen
+      LocalStorageHelper.set(CONST_APP_DARK_MODE_OPEN, this.darkModeOpen)
+    },
+    /** 触发-是否开启头部导航fixed定位 */
+    triggerHeaderFixedOpend() {
+      this.headerFixedOpen = !this.headerFixedOpen
+      LocalStorageHelper.set(CONST_APP_HEADER_FIXED_OPEN, this.headerFixedOpen)
+    },
     /** 触发-侧边栏显示隐藏开关,每次触发取反 */
     triggerSideBarOpened() {
       this.sideBarOpen = !this.sideBarOpen
+      console.log(this.sideBarOpen)
+      LocalStorageHelper.set(CONST_APP_SIDE_BAR_OPEN, this.sideBarOpen)
     },
     /** 修改主题色 */
     async changeThemeColor(color: string) {
@@ -74,6 +128,18 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
       this.tagsViewRecord[index] = tag
 
       LocalStorageHelper.set(CONST_APP_TAGS_VIEW, this.tagsViewRecord)
+    },
+    /**
+     * 切换黑夜模式
+     * @param toDark
+     */
+    changeDarkMode(toDark: boolean) {
+      const body = document.documentElement
+      if (toDark) {
+        body.setAttribute('data-theme', 'dark')
+      } else {
+        body.setAttribute('data-theme', '')
+      }
     }
   }
 })

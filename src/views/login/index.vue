@@ -98,6 +98,7 @@ const onStopClientCopyPasts = () => {
 
 .login-container {
   width: 100%;
+  height: 100vh;
   background-color: $app-bg;
   overflow: hidden;
 
@@ -115,6 +116,7 @@ const onStopClientCopyPasts = () => {
         position: absolute;
         right: 10px;
         bottom: 10px;
+        cursor: pointer;
       }
       .title {
         font-size: 28px;
