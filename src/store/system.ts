@@ -58,6 +58,21 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
         // 更新本地缓存
         LocalStorageHelper.set(CONST_APP_TAGS_VIEW, this.tagsViewRecord)
       }
+    },
+    /**
+     * 刷新TagsViewRecordItem
+     *  - 更新tagsViewRecord
+     *  - 更新本地缓存
+     * @param newTagData
+     */
+    refreshTagsViewRecordItem(newTagData: {
+      tag: TagsViewType
+      index: number
+    }) {
+      const { tag, index } = newTagData
+      this.tagsViewRecord[index] = tag
+
+      LocalStorageHelper.set(CONST_APP_TAGS_VIEW, this.tagsViewRecord)
     }
   }
 })

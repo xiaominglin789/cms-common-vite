@@ -22,7 +22,7 @@ import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSystemStore } from '@/store/system'
 import { canSaveToTagsViewRecord } from '@/utils/tags-view'
-import { generalRouteMenuTitle } from '@/utils/i18n'
+import { generalRouteMenuTitle, languageSwitchMonitor } from '@/utils/i18n'
 
 const route = useRoute()
 const systemStore = useSystemStore()
@@ -52,12 +52,9 @@ const getRouteTitle = (route: any) => {
 watch(
   route,
   (to) => {
-    const isCan = canSaveToTagsViewRecord(to.path)
-    console.log('isCan ', isCan)
-    if (!isCan) return
+    if (!canSaveToTagsViewRecord(to.path)) return
 
     const { fullPath, path, meta, name, params, query } = to
-    console.log('路由变化了')
     systemStore.addTagsViewRecord({
       fullPath,
       path,
@@ -78,6 +75,19 @@ const isActive = (item: any) => {
 
 /** 关闭tag的事件 */
 const onClickClosed = (index: number) => {}
+
+/** 如果语言切换了,触发tagsView的刷新事件: 主要是切换title的国际化 */
+languageSwitchMonitor(() => {
+  tagsList.value.forEach((item, index) => {
+    systemStore.refreshTagsViewRecordItem({
+      index,
+      tag: {
+        ...item,
+        title: getRouteTitle(route)
+      }
+    })
+  })
+})
 </script>
 
 <style lang="scss" scoped>
