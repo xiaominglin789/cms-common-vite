@@ -1,17 +1,17 @@
 <template>
-  <!-- <el-scrollbar> -->
   <div class="app-main" :class="{ 'app-header-fixed': headerFixed }">
-    <!-- header -->
-    <div class="app-header">
-      <!-- nav -->
-      <nav-bar></nav-bar>
-      <!-- tags -->
-      <tags-view></tags-view>
-    </div>
-    <!-- view -->
-    <router-view class="app-view"></router-view>
+    <el-scrollbar>
+      <!-- header -->
+      <div class="app-header">
+        <!-- nav -->
+        <nav-bar></nav-bar>
+        <!-- tags -->
+        <tags-view></tags-view>
+      </div>
+      <!-- view -->
+      <router-view class="app-view"></router-view>
+    </el-scrollbar>
   </div>
-  <!-- </el-scrollbar> -->
 </template>
 
 <script setup lang="ts">
@@ -32,6 +32,8 @@ const headerFixedLeft = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/variables.module.scss';
+
 .app-main {
   position: relative;
   width: 100%;
@@ -54,7 +56,7 @@ const headerFixedLeft = computed(() => {
       z-index: 999;
     }
     .app-view {
-      margin-top: 100px;
+      margin-top: 96px;
     }
   }
 }

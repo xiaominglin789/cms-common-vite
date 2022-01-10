@@ -38,4 +38,9 @@ const menus = computed(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+/** 去除el-menu 伸缩动画边缘线 */
+.el-menu {
+  border-right: 0 !important;
+}
+</style>

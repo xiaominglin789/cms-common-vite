@@ -20,6 +20,8 @@ $subMenuHover: #001528;
 $sideBarWith: 210px;
 $sideBarWithHide: 64px;
 
+$transitionTime_30: 0.3s;
+
 // scss =导出给=> js, css变量共享
 :export {
   menuBg: $menuBg;

@@ -9,7 +9,7 @@
       :style="{ backgroundColor: cssVars.menuBg }"
     ></side-bar>
     <!-- 内容区 -->
-    <app-main></app-main>
+    <app-main class="appmain-container"></app-main>
   </div>
 </template>
 

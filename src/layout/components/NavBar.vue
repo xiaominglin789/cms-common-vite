@@ -74,6 +74,7 @@ const onLogout = async () => {
 
 <style lang="scss" scoped>
 @import '@/styles/mixin.scss';
+@import '@/styles/variables.module.scss';
 
 .nav-bar {
   width: 100%;
@@ -92,7 +93,7 @@ const onLogout = async () => {
       cursor: pointer;
       padding: 2px;
       border-radius: 2px;
-      transition: background-color 0.3s;
+      transition: background-color #{$transitionTime_30} ease-in-out;
     }
     .btn-side-opened:hover {
       background-color: #e3e3e3;
@@ -105,7 +106,6 @@ const onLogout = async () => {
     align-items: center;
     .right-nav-item {
       cursor: pointer;
-      transition: all 0.3s;
     }
     .right-nav-item:hover {
       opacity: 0.9;
