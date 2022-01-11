@@ -22,7 +22,10 @@ export default {
     confirm: 'confirm',
     themeText: 'theme color',
     themeChangeText: 'change theme color',
-    menuFuseTip: 'Quick search menu'
+    menuFuseTip: 'Quick search menu',
+    menuRefresh: 'refresh',
+    menuCloseRight: 'close right',
+    menuCloseOther: 'close others'
   },
   guide: {
     content: 'page guide',

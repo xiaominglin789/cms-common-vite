@@ -6,23 +6,48 @@
       :key="tag.fullPath"
       :class="isActive(tag) ? 'active' : ''"
       :to="{ path: tag.fullPath }"
+      @contextmenu.prevent.stop="onTextMenu($event, index)"
     >
       <span>{{ tag.title }}</span>
-      <i
+      <span
         v-show="!isActive(tag)"
-        class="el-icon-close"
-        @click.prevent.stop="onClickClosed(index)"
-      ></i>
+        class="css-close"
+        @click.prevent.self="onClickClosed(index)"
+      ></span>
     </router-link>
+    <!-- TagsViewMenu -->
+    <tags-view-menu
+      v-show="isOpenTextMenu"
+      :index="selectTagsViewIndex"
+      :style="menuStyle"
+    ></tags-view-menu>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useSystemStore } from '@/store/system'
 import { canSaveToTagsViewRecord } from '@/utils/tags-view'
 import { generalRouteMenuTitle, languageSwitchMonitor } from '@/utils/i18n'
+import TagsViewMenu from './TagsViewMenu.vue'
+
+const isOpenTextMenu = ref(false)
+const selectTagsViewIndex = ref(-1)
+const menuStyle = ref({
+  top: '0',
+  left: '0'
+})
+/** 监听点击右键 */
+const onTextMenu = (e: MouseEvent, index: number) => {
+  const { x, y } = e
+  menuStyle.value = {
+    left: x + 'px',
+    top: y + 'px'
+  }
+  isOpenTextMenu.value = true
+  selectTagsViewIndex.value = index
+}
 
 const route = useRoute()
 const systemStore = useSystemStore()
@@ -74,7 +99,17 @@ const isActive = (item: any) => {
 }
 
 /** 关闭tag的事件 */
-const onClickClosed = (index: number) => {}
+const onClickClosed = (index: number) => {
+  systemStore.removeTagsViewRecord({
+    type: 'index',
+    index
+  })
+}
+
+/** 控制隐藏tagsviewMenu */
+const hideTagsViewMenu = () => {
+  isOpenTextMenu.value = false
+}
 
 /** 如果语言切换了,触发tagsView的刷新事件: 主要是切换title的国际化 */
 languageSwitchMonitor(() => {
@@ -83,10 +118,18 @@ languageSwitchMonitor(() => {
       index,
       tag: {
         ...item,
-        title: getRouteTitle(route)
+        title: getRouteTitle(item)
       }
     })
   })
+})
+
+/** 监听 isOpenTextMenu 状态-控制面板隐藏 */
+watch(isOpenTextMenu, (val) => {
+  if (val) {
+    document.addEventListener('click', hideTagsViewMenu)
+  } else {
+  }
 })
 </script>
 
@@ -99,7 +142,13 @@ languageSwitchMonitor(() => {
   padding: 0 8px;
   gap: 10px;
   box-shadow: 0 1px 2px grey;
+
+  a:active,
+  a:hover {
+    color: none;
+  }
   .tags-view-item {
+    position: relative;
     width: auto;
     height: 28px;
     border: 1px solid blue;
@@ -111,17 +160,51 @@ languageSwitchMonitor(() => {
     border-radius: 4px;
     text-decoration: none;
     span {
-      margin-right: 4px;
+      padding: 6px;
+      cursor: pointer;
     }
-    .el-icon-close {
+    .css-close {
       width: 8px;
       height: 8px;
-      border: 1px solid blue;
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #fff;
       border-radius: 50%;
-      display: inline-block;
+      box-sizing: border-box;
+    }
+    .css-close:hover {
+      border: 1px solid red;
+      border-radius: 50%;
+      &::before {
+        background-color: red;
+      }
+      &::after {
+        background-color: red;
+      }
+    }
+    .css-close::before {
+      content: '';
+      width: 100%;
+      height: 1px;
+      background-color: grey;
+      position: absolute;
+      z-index: 0;
+      transform: rotate(45deg);
+    }
+    .css-close::after {
+      content: '';
+      width: 100%;
+      height: 1px;
+      background-color: grey;
+      position: absolute;
+      z-index: 0;
+      transform: rotate(-45deg);
     }
     &.active {
-      color: red;
+      background-color: #eff;
     }
   }
 }

@@ -12,7 +12,7 @@ import {
   CONST_APP_SIDE_BAR_OPEN
 } from '@/constant/config'
 import { generalStyle, writeNewStyle } from '@/utils/theme'
-import { TagsViewType } from '@/utils/interfaces/tag'
+import { RemoveTagPayload, TagsViewType } from '@/utils/interfaces/tag'
 
 /** 系统配置状态*/
 export const useSystemStore = defineStore(EnumStoreID.systemStore, {
@@ -127,6 +127,34 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
       const { tag, index } = newTagData
       this.tagsViewRecord[index] = tag
 
+      LocalStorageHelper.set(CONST_APP_TAGS_VIEW, this.tagsViewRecord)
+    },
+    /**
+     * 移除某项tagsView
+     * @param payload
+     */
+    removeTagsViewRecord(payload: RemoveTagPayload) {
+      const { type, index } = payload
+      switch (type) {
+        case 'other':
+          this.tagsViewRecord.splice(0, index)
+          this.tagsViewRecord.splice(
+            index + 1,
+            this.tagsViewRecord.length - (index + 1)
+          )
+          break
+        case 'right':
+          this.tagsViewRecord.splice(
+            index + 1,
+            this.tagsViewRecord.length - (index + 1)
+          )
+          break
+        case 'index':
+          this.tagsViewRecord.splice(index, 1)
+          break
+      }
+
+      // 缓存修改后的结果
       LocalStorageHelper.set(CONST_APP_TAGS_VIEW, this.tagsViewRecord)
     },
     /**

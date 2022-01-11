@@ -9,7 +9,18 @@
         <tags-view></tags-view>
       </div>
       <!-- view -->
-      <router-view class="app-view"></router-view>
+      <section class="app-view">
+        <router-view v-if="$route.meta.keepAlive" v-slot="{ Component, route }">
+          <transition :name="route.meta.transition || 'fade'" mode="out-in">
+            <keep-alive>
+              <component :is="Component" :key="route.path" />
+            </keep-alive>
+          </transition>
+        </router-view>
+        <!-- 非缓存 -->
+        <router-view v-if="!$route.meta.keepAlive"></router-view>
+      </section>
+      <!-- end section router-view -->
     </el-scrollbar>
   </div>
 </template>

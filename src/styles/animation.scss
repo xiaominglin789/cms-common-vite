@@ -14,3 +14,17 @@
 .breadcrumb-leave-active {
   position: absolute;
 }
+
+/** fade */
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+.fade-enter-from,
+.fade-leave-active {
+  opacity: 0;
+}
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
