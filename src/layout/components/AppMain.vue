@@ -9,17 +9,18 @@
         <tags-view></tags-view>
       </div>
       <!-- view -->
-      <section class="app-view">
-        <router-view v-if="$route.meta.keepAlive" v-slot="{ Component, route }">
-          <transition :name="route.meta.transition || 'fade'" mode="out-in">
-            <keep-alive>
-              <component :is="Component" :key="route.path" />
-            </keep-alive>
-          </transition>
-        </router-view>
-        <!-- 非缓存 -->
-        <router-view v-if="!$route.meta.keepAlive"></router-view>
-      </section>
+      <Suspense>
+        <template #default>
+          <router-view v-slot="{ Component, route }" class="app-view">
+            <transition name="fade" mode="out-in">
+              <keep-alive>
+                <component :is="Component" :key="route.path" />
+              </keep-alive>
+            </transition>
+          </router-view>
+        </template>
+        <template #fallback> Loading... </template>
+      </Suspense>
       <!-- end section router-view -->
     </el-scrollbar>
   </div>
