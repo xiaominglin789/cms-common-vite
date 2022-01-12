@@ -9,18 +9,24 @@
         <tags-view></tags-view>
       </div>
       <!-- view -->
-      <Suspense>
-        <template #default>
-          <router-view v-slot="{ Component, route }" class="app-view">
-            <transition name="fade" mode="out-in">
-              <keep-alive>
-                <component :is="Component" :key="route.path" />
-              </keep-alive>
-            </transition>
-          </router-view>
-        </template>
-        <template #fallback> Loading... </template>
-      </Suspense>
+      <router-view v-slot="{ Component, route }" class="app-view">
+        <transition name="fade" mode="out-in">
+          <keep-alive>
+            <component
+              :is="Component"
+              :key="route.path"
+              v-if="route.meta.keepAlive"
+            />
+          </keep-alive>
+        </transition>
+        <transition name="fade" mode="out-in">
+          <component
+            :is="Component"
+            :key="route.path"
+            v-if="!route.meta.keepAlive"
+          />
+        </transition>
+      </router-view>
       <!-- end section router-view -->
     </el-scrollbar>
   </div>
