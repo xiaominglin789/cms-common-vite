@@ -11,7 +11,7 @@ export interface UserLoginResponse {
 }
 
 /** 用户信息数据结构(用户基本信息+用户角色+用户可用菜单) */
-export interface UserInformation {
+export interface UserInformationResponse {
   nickname: string
   role: Array<string>
   permission: {

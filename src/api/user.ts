@@ -1,6 +1,6 @@
 import { get, post } from '@/utils/request/service'
 import {
-  UserInformation,
+  UserInformationResponse,
   UserLoginRequest,
   UserLoginResponse
 } from '@/utils/interfaces/user'
@@ -18,4 +18,4 @@ export const userLogin = async (userInfo: UserLoginRequest) => {
  * 获取用户信息
  */
 export const getUserInformation = async () =>
-  get<UserInformation>('/cms/user/information')
+  get<UserInformationResponse>('/cms/user/information')

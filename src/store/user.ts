@@ -1,7 +1,10 @@
 import { getUserInformation, userLogin } from '@/api/user'
 import { useUserInfoCryptoEncode } from '@/hooks/useUserInfoCryptoEncode'
 import router from '@/router'
-import { UserInformation, UserLoginRequest } from '@/utils/interfaces/user'
+import {
+  UserInformationResponse,
+  UserLoginRequest
+} from '@/utils/interfaces/user'
 import { ElMessage } from 'element-plus'
 import { defineStore } from 'pinia'
 import { EnumStoreID } from './store-id-enum'
@@ -20,20 +23,21 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
   state: () => {
     return {
       /** 当前登录的用户信息 */
-      userInfo: <UserInformation>{}
+      userInfo: <UserInformationResponse>{}
     }
   },
   getters: {
-    hasUserInfo(): UserInformation {
+    hasUserInfo(): UserInformationResponse {
       return (
-        (LocalStorageHelper.get(CONST_USER_INFO_KEY) as UserInformation) ||
-        this.userInfo
+        (LocalStorageHelper.get(
+          CONST_USER_INFO_KEY
+        ) as UserInformationResponse) || this.userInfo
       )
     }
   },
   actions: {
     /** 更新用户信息,同步到缓存 */
-    updateUserInfo(info: UserInformation) {
+    updateUserInfo(info: UserInformationResponse) {
       this.userInfo = info
       // 本地缓存
       LocalStorageHelper.set(CONST_USER_INFO_KEY, info)

@@ -57,6 +57,7 @@ const { headerFixedLeftPosition, headerFixedOpen: headerFixed } =
   .app-view {
     width: 100%;
     padding: 0px 10px 40px 10px;
+    margin-top: 2px;
   }
 
   &.app-header-fixed {
@@ -68,7 +69,7 @@ const { headerFixedLeftPosition, headerFixedOpen: headerFixed } =
       z-index: 999;
     }
     .app-view {
-      margin-top: 96px;
+      margin-top: 99px;
     }
   }
 }
