@@ -55,9 +55,17 @@
           </template>
         </el-table-column>
         <!-- 创建时间 -->
-        <el-table-column prop="create_time" label="创建时间" width="180" />
+        <el-table-column label="创建时间" width="180">
+          <template #default="{ row }">
+            {{ formatTimeStamp(row.create_time) }}
+          </template>
+        </el-table-column>
         <!-- 更新时间 -->
-        <el-table-column prop="update_time" label="更新时间" />
+        <el-table-column label="更新时间">
+          <template #default="{ row }">
+            {{ formatTimeStamp(row.update_time) }}
+          </template>
+        </el-table-column>
       </el-table>
       <!-- 分页器 -->
       <el-pagination
@@ -80,6 +88,7 @@ import { ref, onMounted, computed } from 'vue'
 import { getUserList } from '@/api/admin'
 import { UserListResponse } from '@/utils/interfaces/admin'
 import { ElMessage } from 'element-plus'
+import { formatTimeStamp } from '@/utils/utils'
 
 const page = ref(1)
 const size = ref(2)
