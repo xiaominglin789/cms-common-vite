@@ -28,6 +28,8 @@
         </transition>
       </router-view>
       <!-- end section router-view -->
+      <!-- 回到顶部 -->
+      <el-backtop />
     </el-scrollbar>
   </div>
 </template>
