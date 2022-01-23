@@ -19,4 +19,6 @@ export interface UserInformationResponse {
     points: Array<string>
   }
   avatar?: string
+  ip?: string
+  login_time?: number
 }

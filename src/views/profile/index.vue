@@ -21,9 +21,9 @@
             </h3>
             <p class="username"><span>昵称:</span> {{ userInfo.nickname }}</p>
             <p class="user-role"><span>身份:</span> {{ userInfo.role }}</p>
-            <p class="user-ip"><span>登录ip:</span> 192.168.1.100</p>
+            <p class="user-ip"><span>登录ip:</span> {{ userInfo.ip }}</p>
             <p class="user-login-time">
-              <span>登录时间:</span> 2021-11-11 12:23:00
+              <span>登录时间:</span> <span v-if="userInfo.login_time">{{ formatTimeStamp(userInfo.login_time) }}</span>
             </p>
           </el-col>
         </el-row>
@@ -108,6 +108,7 @@
 import { computed, ref } from 'vue'
 import { useSystemStore } from '@/store/system'
 import { useUserStore } from '@/store/user'
+import { formatTimeStamp } from "@/utils/utils"
 
 const systemStore = useSystemStore()
 const userStore = useUserStore()
