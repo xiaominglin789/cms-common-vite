@@ -12,18 +12,30 @@
                 :size="100"
                 shape="square"
                 :src="userInfo.avatar"
-              ></el-avatar>
+              />
             </div>
           </el-col>
-          <el-col :span="19" class="des-box">
+          <el-col
+            :span="19"
+            class="des-box"
+          >
             <h3 class="title">
               早安 午安 晚安! {{ userInfo.nickname }} 加油！
             </h3>
-            <p class="username"><span>昵称:</span> {{ userInfo.nickname }}</p>
-            <p class="user-role"><span>身份:</span> {{ userInfo.role }}</p>
-            <p class="user-ip"><span>登录ip:</span> {{ userInfo.ip }}</p>
+            <p class="username">
+              <span>昵称:</span> {{ userInfo.nickname }}
+            </p>
+            <p class="user-role">
+              <span>身份:</span> {{ userInfo.role }}
+            </p>
+            <p class="user-ip">
+              <span>登录ip:</span> {{ userInfo.ip }}
+            </p>
             <p class="user-login-time">
-              <span>登录时间:</span> <span v-if="userInfo.login_time">{{ formatTimeStamp(userInfo.login_time) }}</span>
+              <span>登录时间:</span>
+              <span v-if="userInfo.loginTime">{{
+                formatTimeStamp(userInfo.loginTime)
+              }}</span>
             </p>
           </el-col>
         </el-row>
@@ -49,55 +61,83 @@
       <template #header>
         <span>更新信息</span>
       </template>
-      <el-form ref="formRef" class="update-form">
-        <el-form-item label="基本信息" class="title"></el-form-item>
+      <el-form
+        ref="formRef"
+        class="update-form"
+      >
+        <el-form-item
+          label="基本信息"
+          class="title"
+        />
         <el-form-item>
           <el-row gutter="10">
             <el-col :span="8">
               <span class="inline-flex">新昵称:</span>
-              <el-input v-model="userNickname" placeholder="输入新昵称"></el-input>
+              <el-input
+                v-model="userNickname"
+                placeholder="输入新昵称"
+              />
             </el-col>
             <el-col :span="8">
               <span>新邮箱:</span>
-              <el-input v-model="userEmail" placeholder="输入新Email"></el-input>
+              <el-input
+                v-model="userEmail"
+                placeholder="输入新Email"
+              />
             </el-col>
             <el-col :span="8">
               <span>新手机号:</span>
-              <el-input v-model="userPhone" placeholder="输入新手机号"></el-input>
+              <el-input
+                v-model="userPhone"
+                placeholder="输入新手机号"
+              />
             </el-col>
           </el-row>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onUpdateUserInfo" class="btn-update">
+          <el-button
+            type="primary"
+            @click="onUpdateUserInfo"
+            class="btn-update"
+          >
             更新个人信息
           </el-button>
         </el-form-item>
       </el-form>
-      <el-divider></el-divider>
+      <el-divider />
       <el-form class="accout-safe-form">
-        <el-form-item label="账户安全" class="title"></el-form-item>
+        <el-form-item
+          label="账户安全"
+          class="title"
+        />
         <el-form-item class="safe-item safe-pwd">
-          <p>
+          <span>
             <p>账户密码</p>
             <p>当前密码强度: 强</p>
-          </p>
-          <router-link to="/">修改密码</router-link>
+          </span>
+          <router-link to="/">
+            修改密码
+          </router-link>
         </el-form-item>
-        <el-divider></el-divider>
+        <el-divider />
         <el-form-item class="safe-item safe-pwd">
-          <p>
+          <span>
             <p>绑定手机号</p>
             <p>已绑手机号: 135xxxxx0000</p>
-          </p>
-          <router-link to="/">更换手机号</router-link>
+          </span>
+          <router-link to="/">
+            更换手机号
+          </router-link>
         </el-form-item>
-        <el-divider></el-divider>
+        <el-divider />
         <el-form-item class="safe-item safe-email">
-          <p>
+          <span>
             <p>绑定邮箱</p>
             <p>已绑邮箱: 1230@qq.com</p>
-          </p>
-          <router-link to="/">更换新手机号</router-link>
+          </span>
+          <router-link to="/">
+            更换新手机号
+          </router-link>
         </el-form-item>
       </el-form>
     </el-card>
@@ -108,14 +148,14 @@
 import { computed, ref } from 'vue'
 import { useSystemStore } from '@/store/system'
 import { useUserStore } from '@/store/user'
-import { formatTimeStamp } from "@/utils/utils"
+import { formatTimeStamp } from '@/utils/utils'
 
 const systemStore = useSystemStore()
 const userStore = useUserStore()
 const test = ref('')
-const userNickname = ref("");
-const userPhone = ref("");
-const userEmail = ref("");
+const userNickname = ref('')
+const userPhone = ref('')
+const userEmail = ref('')
 
 const userInfo = computed(() => userStore.hasUserInfo)
 
@@ -166,7 +206,7 @@ const onUpdateUserInfo = () => {}
       cursor: text;
     }
     .title::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 48%;
       left: 4px;
@@ -178,7 +218,6 @@ const onUpdateUserInfo = () => {}
     }
 
     .update-form {
-      
     }
     .accout-safe-form {
       .safe-item:deep(.el-form-item__content) {

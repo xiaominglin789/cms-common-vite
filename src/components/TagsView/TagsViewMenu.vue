@@ -1,8 +1,14 @@
 <template>
   <ul class="tags-view-menu">
-    <li @click="onMenuRefresh">{{ $t('sys.menuRefresh') }}</li>
-    <li @click="onMenuCloseRight">{{ $t('sys.menuCloseRight') }}</li>
-    <li @click="onMenuCloseOther">{{ $t('sys.menuCloseOther') }}</li>
+    <li @click="onMenuRefresh">
+      {{ $t('sys.menuRefresh') }}
+    </li>
+    <li @click="onMenuCloseRight">
+      {{ $t('sys.menuCloseRight') }}
+    </li>
+    <li @click="onMenuCloseOther">
+      {{ $t('sys.menuCloseOther') }}
+    </li>
   </ul>
 </template>
 

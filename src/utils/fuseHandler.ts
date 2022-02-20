@@ -28,9 +28,10 @@ class FuseHandler {
       }
     ]
   }
+
   private fuseObj!: Fuse<FuseSearchPoolDataType>
 
-  constructor(routeMenus: RouteRecordRaw[]) {
+  constructor (routeMenus: RouteRecordRaw[]) {
     const list = this.routeMenusProcessed(routeMenus)
     // console.log(list)
 
@@ -38,14 +39,14 @@ class FuseHandler {
   }
 
   /** 路由菜单数据类型 转 模糊搜索需要的数据结构 */
-  private routeMenusProcessed(
+  private routeMenusProcessed (
     routeMenus: RouteRecordRaw[],
     basePath = '/',
     prefixTitle = <string[]>[]
   ): any[] {
     let res: FuseSearchPoolDataType[] = []
 
-    for (let menu of routeMenus) {
+    for (const menu of routeMenus) {
       // xxx
       let path = basePath + menu.path
       path = path.replace(basePath, '')
@@ -84,7 +85,7 @@ class FuseHandler {
    * 模糊搜索
    * @param query 关键字_字符串
    */
-  public search(query: string): FuseSearchResultDataType[] {
+  public search (query: string): FuseSearchResultDataType[] {
     return this.fuseObj.search(query)
   }
 }

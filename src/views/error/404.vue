@@ -1,5 +1,7 @@
 <template>
-  <div class="">找不到页面</div>
+  <div class="">
+    找不到页面
+  </div>
 </template>
 
 <script setup lang="ts"></script>

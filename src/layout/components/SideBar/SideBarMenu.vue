@@ -13,7 +13,7 @@
       v-for="menu in menus"
       :key="menu.path"
       :route="menu"
-    ></side-bar-menu-item>
+    />
   </el-menu>
 </template>
 

@@ -7,11 +7,19 @@
       class="login-form"
     >
       <div class="title-container">
-        <h3 class="title">{{ $t('login.title') }}</h3>
-        <app-language class="language" bg-color="#fff"></app-language>
+        <h3 class="title">
+          {{ $t('login.title') }}
+        </h3>
+        <app-language
+          class="language"
+          bg-color="#fff"
+        />
       </div>
       <!-- username -->
-      <el-form-item prop="username" class="form form-username">
+      <el-form-item
+        prop="username"
+        class="form form-username"
+      >
         <span class="svg-container">
           <svg-icon icon="user" />
         </span>
@@ -23,7 +31,10 @@
         />
       </el-form-item>
       <!-- password -->
-      <el-form-item prop="password" class="form form-password">
+      <el-form-item
+        prop="password"
+        class="form form-password"
+      >
         <span class="svg-container">
           <svg-icon icon="password" />
         </span>
@@ -37,14 +48,23 @@
           @cut.native.capture.prevent="onStopClientCopyPasts"
           @contextmenu.native.capture.prevent="onStopClientCopyPasts"
         />
-        <span class="show-pwd" @click="onChangePwdType">
+        <span
+          class="show-pwd"
+          @click="onChangePwdType"
+        >
           <svg-icon :icon="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
       <!-- login-btn -->
-      <el-button type="primary" class="btn-login" @click="onHandleLogin">{{
-        $t('login.submitText')
-      }}</el-button>
+      <el-button
+        type="primary"
+        class="btn-login"
+        @click="onHandleLogin"
+      >
+        {{
+          $t('login.submitText')
+        }}
+      </el-button>
     </el-form>
   </div>
 </template>

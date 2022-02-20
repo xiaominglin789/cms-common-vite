@@ -1,7 +1,14 @@
 <template>
   <!-- 渲染icon+标题 -->
-  <el-icon v-if="isElementSvgIcon" class="svg-icon" :class="icon"></el-icon>
-  <svg-icon v-else :icon="icon"></svg-icon>
+  <el-icon
+    v-if="isElementSvgIcon"
+    class="svg-icon"
+    :class="icon"
+  />
+  <svg-icon
+    v-else
+    :icon="icon"
+  />
   <span>{{ title && generalRouteMenuTitle(title) }}</span>
 </template>
 

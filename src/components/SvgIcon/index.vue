@@ -5,10 +5,18 @@
     :style="styleWithWebIcon"
     class="svg-web-icon svg-icon"
     :class="className"
-  ></div>
+  />
   <!-- 展示ui库的内部图标 -->
-  <svg v-else class="svg-icon" :class="className" aria-hidden="true">
-    <use :xlink:href="styleLocal" :fill="color" />
+  <svg
+    v-else
+    class="svg-icon"
+    :class="className"
+    aria-hidden="true"
+  >
+    <use
+      :xlink:href="styleLocal"
+      :fill="color"
+    />
   </svg>
 </template>
 

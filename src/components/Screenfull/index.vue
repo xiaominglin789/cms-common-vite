@@ -1,9 +1,12 @@
 <template>
-  <div class="screen-full" @click="onToggleScreen">
+  <div
+    class="screen-full"
+    @click="onToggleScreen"
+  >
     <svg-icon
       :size="size"
       :icon="opened ? 'exit-fullscreen' : 'fullscreen'"
-    ></svg-icon>
+    />
   </div>
 </template>
 

@@ -1,8 +1,11 @@
 <template>
   <div class="side-bar">
-    <app-logo :src="iconAvatarSrc" :title="CONST_APPLICATION_NAME"></app-logo>
+    <app-logo
+      :src="iconAvatarSrc"
+      :title="CONST_APPLICATION_NAME"
+    />
     <el-scrollbar>
-      <SideBarMenu></SideBarMenu>
+      <SideBarMenu />
     </el-scrollbar>
   </div>
 </template>

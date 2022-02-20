@@ -1,16 +1,25 @@
 <template>
-  <div class="app-main" :class="{ 'app-header-fixed': headerFixed }">
+  <div
+    class="app-main"
+    :class="{ 'app-header-fixed': headerFixed }"
+  >
     <el-scrollbar>
       <!-- header -->
       <div class="app-header">
         <!-- nav -->
-        <nav-bar></nav-bar>
+        <nav-bar />
         <!-- tags -->
-        <tags-view></tags-view>
+        <tags-view />
       </div>
       <!-- view -->
-      <router-view v-slot="{ Component, route }" class="app-view">
-        <transition name="fade" mode="out-in">
+      <router-view
+        v-slot="{ Component, route }"
+        class="app-view"
+      >
+        <transition
+          name="fade"
+          mode="out-in"
+        >
           <keep-alive>
             <component
               :is="Component"
@@ -19,7 +28,10 @@
             />
           </keep-alive>
         </transition>
-        <transition name="fade" mode="out-in">
+        <transition
+          name="fade"
+          mode="out-in"
+        >
           <component
             :is="Component"
             :key="route.path"

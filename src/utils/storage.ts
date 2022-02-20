@@ -6,7 +6,7 @@ class LocalStorageHelper {
    * @param value
    * @returns
    */
-  static set(key: string, value: any) {
+  static set (key: string, value: any) {
     if (!key) return
 
     let valueStr = value
@@ -23,10 +23,10 @@ class LocalStorageHelper {
    * @param key
    * @returns
    */
-  static get(key: string) {
+  static get (key: string) {
     if (!key) return
 
-    let result = window.localStorage.getItem(key)
+    const result = window.localStorage.getItem(key)
     try {
       if (result == null) {
         return result
@@ -42,14 +42,14 @@ class LocalStorageHelper {
    * @param key
    * @returns
    */
-  static remove(key: string) {
+  static remove (key: string) {
     if (!key) return
 
     window.localStorage.removeItem(key)
   }
 
   /** 清空所有本地缓存 */
-  static clear() {
+  static clear () {
     window.localStorage.clear()
   }
 }
@@ -62,7 +62,7 @@ class SessionStorageHelper {
    * @param value
    * @returns
    */
-  static set(key: string, value: any) {
+  static set (key: string, value: any) {
     if (!key) return
 
     let valueStr = value
@@ -77,7 +77,7 @@ class SessionStorageHelper {
    * @param key
    * @returns
    */
-  static get(key: string) {
+  static get (key: string) {
     if (!key) return
 
     const value = window.sessionStorage.getItem(key) || ''
@@ -93,14 +93,14 @@ class SessionStorageHelper {
    * @param key
    * @returns
    */
-  static remove(key: string) {
+  static remove (key: string) {
     if (!key) return
 
     window.sessionStorage.removeItem(key)
   }
 
   /** 清空所有session临时缓存 */
-  static clear() {
+  static clear () {
     window.sessionStorage.clear()
   }
 }

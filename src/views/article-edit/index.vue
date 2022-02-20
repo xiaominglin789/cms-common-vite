@@ -1,5 +1,7 @@
 <template>
-  <div class="">修改文章</div>
+  <div class="">
+    修改文章
+  </div>
 </template>
 
 <script setup lang="ts"></script>

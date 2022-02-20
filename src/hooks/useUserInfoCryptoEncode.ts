@@ -11,7 +11,7 @@ interface IUserInfoCryptoEncode {
  * username: aes-256-cbc 加密
  * password: aes-256-cbc(base64) 加密
  */
-export function useUserInfoCryptoEncode(): IUserInfoCryptoEncode {
+export function useUserInfoCryptoEncode (): IUserInfoCryptoEncode {
   const doUsenameEncode = (username: string) => {
     return useAESEncrypt(username)
   }

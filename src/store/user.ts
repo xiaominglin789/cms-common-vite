@@ -27,7 +27,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
     }
   },
   getters: {
-    hasUserInfo(): UserInformationResponse {
+    hasUserInfo (): UserInformationResponse {
       return (
         (LocalStorageHelper.get(
           CONST_USER_INFO_KEY
@@ -37,13 +37,13 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
   },
   actions: {
     /** 更新用户信息,同步到缓存 */
-    updateUserInfo(info: UserInformationResponse) {
+    updateUserInfo (info: UserInformationResponse) {
       this.userInfo = info
       // 本地缓存
       LocalStorageHelper.set(CONST_USER_INFO_KEY, info)
     },
     /** 登录 */
-    async login(userInfo: UserLoginRequest) {
+    async login (userInfo: UserLoginRequest) {
       const { username, password } = userInfo
       const encodeHelper = useUserInfoCryptoEncode()
 
@@ -58,10 +58,10 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
         // console.log(result)
         // console.log(result.data)
 
-        const { access_token, refresh_token } = result.data
-        if (access_token) {
+        const { accessToken, refreshToken } = result.data
+        if (accessToken) {
           // 触发token的保存,然后跳转到<首页|重要页面>
-          TokenHelper.saveToken(access_token, refresh_token)
+          TokenHelper.saveToken(accessToken, refreshToken)
 
           // 记录用户登录时间
           AuthManualTokenExpireIn.isOpenManua &&
@@ -77,7 +77,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
       } catch (error) {}
     },
     /** 获取用户信息 */
-    async getUserInfo() {
+    async getUserInfo () {
       try {
         const result = await getUserInformation()
         result.data && this.updateUserInfo(result.data)
@@ -89,7 +89,7 @@ export const useUserStore = defineStore(EnumStoreID.userStore, {
      *  2.清理权限相关配置
      *  最后强制跳转到登录页
      */
-    async logout() {
+    async logout () {
       // localStorage
       LocalStorageHelper.clear()
       // clear permission-config

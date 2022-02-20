@@ -1,7 +1,10 @@
 <template>
   <div class="dynamic-theme">
     <el-dropdown trigger="click">
-      <svg-icon :size="size" :icon="icon"></svg-icon>
+      <svg-icon
+        :size="size"
+        :icon="icon"
+      />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="openDialog">
@@ -24,13 +27,20 @@
         <el-color-picker
           v-model="selectColor"
           :predefine="predefineColors"
-        ></el-color-picker>
+        />
       </div>
       <template #footer>
-        <el-button @click="closeDialog">{{ $t('sys.cancel') }}</el-button>
-        <el-button type="primary" @click="themeColorChange">{{
-          $t('sys.confirm')
-        }}</el-button>
+        <el-button @click="closeDialog">
+          {{ $t('sys.cancel') }}
+        </el-button>
+        <el-button
+          type="primary"
+          @click="themeColorChange"
+        >
+          {{
+            $t('sys.confirm')
+          }}
+        </el-button>
       </template>
     </el-dialog>
   </div>

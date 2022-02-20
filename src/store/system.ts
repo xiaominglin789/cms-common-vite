@@ -14,7 +14,7 @@ import {
 import { generalStyle, writeNewStyle } from '@/utils/theme'
 import { RemoveTagPayload, TagsViewType } from '@/utils/interfaces/tag'
 
-/** 系统配置状态*/
+/** 系统配置状态 */
 export const useSystemStore = defineStore(EnumStoreID.systemStore, {
   state: () => {
     return {
@@ -35,7 +35,7 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
     }
   },
   getters: {
-    headerFixedLeftPosition(): string {
+    headerFixedLeftPosition (): string {
       let _left = '0px'
       if (this.headerFixedOpen && this.sideBarOpen) {
         _left = this.cssVars.sideBarWith
@@ -48,18 +48,14 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
   },
   actions: {
     /** 配置初始化-用在App入口查询本地缓存初始化 */
-    async systemConfigInit() {
+    async systemConfigInit () {
       this.darkModeOpen =
-        LocalStorageHelper.get(CONST_APP_DARK_MODE_OPEN) === true ? true : false
+        LocalStorageHelper.get(CONST_APP_DARK_MODE_OPEN) === true
       this.headerFixedOpen =
         LocalStorageHelper.get(CONST_APP_HEADER_FIXED_OPEN) === true
-          ? true
-          : false
       this.sideBarOpen =
-        LocalStorageHelper.get(CONST_APP_SIDE_BAR_OPEN) === true ||
-        LocalStorageHelper.get(CONST_APP_SIDE_BAR_OPEN) === null
-          ? true
-          : false
+        !!(LocalStorageHelper.get(CONST_APP_SIDE_BAR_OPEN) === true ||
+        LocalStorageHelper.get(CONST_APP_SIDE_BAR_OPEN) === null)
       this.themeColor =
         LocalStorageHelper.get(CONST_APP_THEME_COLOR_KEY) === null
           ? ''
@@ -71,23 +67,23 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
       this.changeDarkMode(this.darkModeOpen)
     },
     /** 触发-是否开启黑夜模式 */
-    triggerDarkModeOpend() {
+    triggerDarkModeOpend () {
       this.darkModeOpen = !this.darkModeOpen
       LocalStorageHelper.set(CONST_APP_DARK_MODE_OPEN, this.darkModeOpen)
     },
     /** 触发-是否开启头部导航fixed定位 */
-    triggerHeaderFixedOpend() {
+    triggerHeaderFixedOpend () {
       this.headerFixedOpen = !this.headerFixedOpen
       LocalStorageHelper.set(CONST_APP_HEADER_FIXED_OPEN, this.headerFixedOpen)
     },
     /** 触发-侧边栏显示隐藏开关,每次触发取反 */
-    triggerSideBarOpened() {
+    triggerSideBarOpened () {
       this.sideBarOpen = !this.sideBarOpen
       console.log(this.sideBarOpen)
       LocalStorageHelper.set(CONST_APP_SIDE_BAR_OPEN, this.sideBarOpen)
     },
     /** 修改主题色 */
-    async changeThemeColor(color: string) {
+    async changeThemeColor (color: string) {
       if (!color) return
       // 修改element-plus的主题色
       const newStyle = await generalStyle(color)
@@ -101,7 +97,7 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
       LocalStorageHelper.set(CONST_APP_THEME_COLOR_KEY, color)
     },
     /** 添加 tags 路由标签导航记录 */
-    addTagsViewRecord(tag: TagsViewType) {
+    addTagsViewRecord (tag: TagsViewType) {
       // 数组去重
       const has = this.tagsViewRecord.find((item: TagsViewType) => {
         return item.path === tag.path
@@ -120,7 +116,7 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
      *  - 更新本地缓存
      * @param newTagData
      */
-    refreshTagsViewRecordItem(newTagData: {
+    refreshTagsViewRecordItem (newTagData: {
       tag: TagsViewType
       index: number
     }) {
@@ -133,15 +129,20 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
      * 移除某项tagsView
      * @param payload
      */
-    removeTagsViewRecord(payload: RemoveTagPayload) {
+    removeTagsViewRecord (payload: RemoveTagPayload) {
       const { type, index } = payload
       switch (type) {
         case 'other':
-          this.tagsViewRecord.splice(0, index)
-          this.tagsViewRecord.splice(
-            index + 1,
-            this.tagsViewRecord.length - (index + 1)
-          )
+          // 移除index前的,移除index后的
+          // 之前的删除逻辑是有问题的
+          // arr.splice(0,index) 删除index前面的,
+          // 已经改变了arr的长度,index的元素跑到了首位,
+          // 那么 arr.splice(index+1, arr.length-1) 删除的位置是不正确的了
+          // 解决方案:
+          // 1.先删除index后面的,再删除前面的
+          // 2.移除index前的,移除index后的 = 只保留一当前项
+          const current = this.tagsViewRecord.at(index)
+          current && (this.tagsViewRecord = [current])
           break
         case 'right':
           this.tagsViewRecord.splice(
@@ -161,7 +162,7 @@ export const useSystemStore = defineStore(EnumStoreID.systemStore, {
      * 切换黑夜模式
      * @param toDark
      */
-    changeDarkMode(toDark: boolean) {
+    changeDarkMode (toDark: boolean) {
       const body = document.documentElement
       if (toDark) {
         body.setAttribute('data-theme', 'dark')

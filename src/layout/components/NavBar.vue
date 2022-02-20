@@ -1,40 +1,51 @@
 <template>
   <div class="nav-bar">
     <div class="left-nav">
-      <side-bar-opened class="btn-side-opened"></side-bar-opened>
-      <breadcrumb class="breadcrumb"></breadcrumb>
+      <side-bar-opened class="btn-side-opened" />
+      <breadcrumb class="breadcrumb" />
     </div>
     <div class="right-nav">
       <!-- 页面引导 -->
-      <app-guide class="right-nav-item"></app-guide>
+      <app-guide class="right-nav-item" />
       <!-- 页面搜索 -->
-      <header-search class="right-nav-item"></header-search>
+      <header-search class="right-nav-item" />
       <!-- 换肤 -->
-      <dynamic-theme class="right-nav-item"></dynamic-theme>
+      <dynamic-theme class="right-nav-item" />
       <!-- 国际化 -->
-      <app-language class="right-nav-item"></app-language>
+      <app-language class="right-nav-item" />
       <!-- 全屏 -->
-      <screenfull class="right-nav-item"></screenfull>
+      <screenfull class="right-nav-item" />
       <!-- 头像 -->
-      <el-dropdown trigger="hover" class="right-nav-item">
+      <el-dropdown
+        trigger="hover"
+        class="right-nav-item"
+      >
         <div class="avatar-box">
           <!-- 圆角头像 -->
-          <el-avatar shape="circle" :size="30" :src="userAvatar"></el-avatar>
+          <el-avatar
+            shape="circle"
+            :size="30"
+            :src="userAvatar"
+          />
         </div>
         <!-- 头像下拉菜单 -->
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>
-              <router-link to="/">{{ $t('sys.home') }}</router-link>
+              <router-link to="/">
+                {{ $t('sys.home') }}
+              </router-link>
             </el-dropdown-item>
             <el-dropdown-item>
               <a
                 target="__blank"
                 href="https://github.com/xiaominglin789/cms-common-vite"
-                >{{ $t('sys.github') }}</a
-              >
+              >{{ $t('sys.github') }}</a>
             </el-dropdown-item>
-            <el-dropdown-item @click="onLogout" divided>
+            <el-dropdown-item
+              @click="onLogout"
+              divided
+            >
               {{ $t('sys.logout') }}
             </el-dropdown-item>
           </el-dropdown-menu>

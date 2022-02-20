@@ -15,20 +15,20 @@ import { UserLoginResponse } from '../interfaces/user'
 const service = axios.create({
   baseURL: String(import.meta.env.VITE_APP_BASE_URL) || '',
   timeout: Number(import.meta.env.VITE_APP_TIME_OUT) || 5000, // 请求超时时间设置
-  validateStatus(status: number) {
+  validateStatus (status: number) {
     return status >= 200 && status < 510
   }
 })
 
 /** 判断是否为refresh_token刷新access_token时出现的异常 */
-function errorByRefreshTokenExeption(code: number) {
+function errorByRefreshTokenExeption (code: number) {
   // 从配置中读取
   const codes: Array<number> = [403039]
   return codes.includes(code)
 }
 
 /** 判断是否为access_token过期异常 */
-function errorByAcceTokenExpireInException(code: number) {
+function errorByAcceTokenExpireInException (code: number) {
   // 从配置中读取
   const codes: Array<number> = [403000]
   return codes.includes(code)
@@ -147,12 +147,12 @@ service.interceptors.response.use(
           // 是否启用了双令牌刷新
           if (CONST_SYS_TOKEN_AUTOMATIC_RENEWAL()) {
             TokenHelper.saveToken(
-              tokenResult.data.access_token,
-              tokenResult.data.access_token
+              tokenResult.data.accessToken,
+              tokenResult.data.accessToken
             )
           } else {
             // 只刷新accessToken
-            TokenHelper.saveAccessToken(tokenResult.data.access_token)
+            TokenHelper.saveAccessToken(tokenResult.data.accessToken)
           }
           // 将上次失败请求重发
           const result = await service(response.config)
@@ -205,7 +205,7 @@ service.interceptors.response.use(
  * @param params query参数对象: key-value
  * @returns Promise
  */
-function get<T>(url: string, params?: Record<string, any>): AxiosPromise<T> {
+function get<T> (url: string, params?: Record<string, any>): AxiosPromise<T> {
   return service({
     method: 'GET',
     url,
@@ -219,7 +219,7 @@ function get<T>(url: string, params?: Record<string, any>): AxiosPromise<T> {
  * @param data body参数, key-value
  * @returns Promise
  */
-function post<T>(url: string, data?: Record<string, any>): AxiosPromise<T> {
+function post<T> (url: string, data?: Record<string, any>): AxiosPromise<T> {
   return service({
     method: 'POST',
     url,
@@ -233,7 +233,7 @@ function post<T>(url: string, data?: Record<string, any>): AxiosPromise<T> {
  * @param data body参数对象, key-value
  * @returns Promise
  */
-function put<T>(url: string, data?: Record<string, any>): AxiosPromise<T> {
+function put<T> (url: string, data?: Record<string, any>): AxiosPromise<T> {
   return service({
     method: 'PUT',
     url,
@@ -247,7 +247,7 @@ function put<T>(url: string, data?: Record<string, any>): AxiosPromise<T> {
  * @param url 请求地址
  * @returns Promise
  */
-function _delete(url: string) {
+function _delete (url: string) {
   return service({
     method: 'DELETE',
     url

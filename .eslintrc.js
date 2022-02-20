@@ -23,5 +23,13 @@ module.exports = {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-unused-vars": "off",
     'vue/multi-word-component-names': 'off',
+    "vue/no-deprecated-v-on-native-modifier": "warn",
+    "vue/no-parsing-error": "off"
+  },
+  globals: {
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly'
   }
 };

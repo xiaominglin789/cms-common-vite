@@ -13,14 +13,14 @@
         v-show="!isActive(tag)"
         class="css-close"
         @click.prevent.self="onClickClosed(index)"
-      ></span>
+      />
     </router-link>
     <!-- TagsViewMenu -->
     <tags-view-menu
       v-show="isOpenTextMenu"
       :index="selectTagsViewIndex"
       :style="menuStyle"
-    ></tags-view-menu>
+    />
   </div>
 </template>
 

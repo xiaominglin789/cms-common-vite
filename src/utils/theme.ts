@@ -45,7 +45,7 @@ const elColorMap = {
  * @param styleText
  */
 const styleReplaceTag = (styleText: string) => {
-  for (let [k, v] of Object.entries(elColorMap)) {
+  for (const [k, v] of Object.entries(elColorMap)) {
     styleText = styleText.replace(new RegExp(k, 'ig'), v)
   }
   return styleText
@@ -95,11 +95,11 @@ export const writeNewStyle = (newStyle: string) => {
 export const generalColors = (mainColor: string) => {
   if (!mainColor) return
 
-  let colors: any = {
+  const colors: any = {
     primary: mainColor
   }
 
-  for (let [k, v] of Object.entries(fornums)) {
+  for (const [k, v] of Object.entries(fornums)) {
     const val = v.replace(/primary/g, mainColor)
     colors[k] = '#' + rgbHex(colorFunc.convert(val))
   }

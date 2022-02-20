@@ -20,7 +20,7 @@ const useLocaleStore = defineStore(EnumStoreID.localeStore, {
   },
   getters: {
     /** 当前系统语言数据信息对象 */
-    currentLocale(): any {
+    currentLocale (): any {
       return i18n.global.messages[i18n.global.locale]
     }
   },
@@ -30,7 +30,7 @@ const useLocaleStore = defineStore(EnumStoreID.localeStore, {
      * @param language
      * @returns true: 设置成功； false: 设置失败
      */
-    setLanguage(language: string): boolean {
+    setLanguage (language: string): boolean {
       if (!Object.keys(this.langsRecord).includes(language)) return false
 
       // 更换i18的语言,本地缓存
@@ -41,7 +41,7 @@ const useLocaleStore = defineStore(EnumStoreID.localeStore, {
       return true
     },
     /** 提供-取消息的方法 */
-    msg(key: string): string {
+    msg (key: string): string {
       return i18n.global.t(key)
     }
   }

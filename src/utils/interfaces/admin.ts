@@ -5,8 +5,8 @@ export interface UserListType {
   roles: string[]
   actions: string[]
   avatar: string
-  create_time: number
-  update_time: number
+  createTime: number
+  updateTime: number
   mobble: string
 }
 

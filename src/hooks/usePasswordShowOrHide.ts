@@ -9,7 +9,7 @@ interface IPasswordShowOrHideResult {
  * 密码输入栏状态控制
  * @returns
  */
-export function usePasswordShowOrHide(): IPasswordShowOrHideResult {
+export function usePasswordShowOrHide (): IPasswordShowOrHideResult {
   const passwordType = ref('password')
 
   const onChangePwdType = () => {

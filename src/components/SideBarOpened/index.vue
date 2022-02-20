@@ -1,5 +1,8 @@
 <template>
-  <div class="side-bar-opened" @click="onChange">
+  <div
+    class="side-bar-opened"
+    @click="onChange"
+  >
     <svg-icon :icon="svgIconName" />
   </div>
 </template>

@@ -6,8 +6,8 @@ export interface UserLoginRequest {
 
 /** 用户登录响应数据结构 */
 export interface UserLoginResponse {
-  access_token: string
-  refresh_token?: string
+  accessToken: string
+  refreshToken?: string
 }
 
 /** 用户信息数据结构(用户基本信息+用户角色+用户可用菜单) */
@@ -20,5 +20,5 @@ export interface UserInformationResponse {
   }
   avatar?: string
   ip?: string
-  login_time?: number
+  loginTime?: number
 }

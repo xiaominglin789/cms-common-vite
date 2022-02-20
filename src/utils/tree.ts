@@ -6,8 +6,8 @@
  * @param {*} list
  * @returns
  */
-export function treeArrayToFlat(treeArray: any[], list = <any[]>[]) {
-  for (let child of treeArray) {
+export function treeArrayToFlat (treeArray: any[], list = <any[]>[]) {
+  for (const child of treeArray) {
     if (child.children) {
       // 构建新结构，存父级数据
       list.push({
@@ -33,14 +33,14 @@ export function treeArrayToFlat(treeArray: any[], list = <any[]>[]) {
  * @param {*} needChilrenEve 是否每一项加:children
  * @returns
  */
-export function flatArrayToTree(flatArray: any[], needChilrenEve = false) {
+export function flatArrayToTree (flatArray: any[], needChilrenEve = false) {
   return flatArray.filter((child) => {
     if (needChilrenEve) {
       // 每一项加:children
       child.children = []
     }
 
-    let newArray = flatArray.filter((item) => {
+    const newArray = flatArray.filter((item) => {
       if (item.id === child.pid) {
         // item是child的父项
         if (!item.children) {

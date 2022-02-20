@@ -1,9 +1,18 @@
 <template>
-  <div class="app-guide" @click="clickGuideStart">
-    <el-tooltip :content="$t('guide.content')" effect="light">
+  <div
+    class="app-guide"
+    @click="clickGuideStart"
+  >
+    <el-tooltip
+      :content="$t('guide.content')"
+      effect="light"
+    >
       <div>
         <!-- 为何el-tooltip不能识别我自定义的svg-icon组件？非得再包一个标签? -->
-        <svg-icon :size="size" :icon="icon"></svg-icon>
+        <svg-icon
+          :size="size"
+          :icon="icon"
+        />
       </div>
     </el-tooltip>
   </div>

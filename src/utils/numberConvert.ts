@@ -5,7 +5,7 @@
  * @param num
  * @returns
  */
-export function numberMinAddZoreBefore(num: number | string): number | string {
+export function numberMinAddZoreBefore (num: number | string): number | string {
   if (num >= 0 && num < 10) {
     return '0' + num
   }
@@ -18,7 +18,7 @@ export function numberMinAddZoreBefore(num: number | string): number | string {
  * @param num
  * @returns
  */
-export function numberToDivision(num: number): string {
+export function numberToDivision (num: number): string {
   return num.toLocaleString()
 }
 
@@ -30,7 +30,7 @@ export function numberToDivision(num: number): string {
  * @param signDisplay 默认自动, 'auto'(自动) | 'never'(不显示符号) | 'always'(显示符号)
  * @returns
  */
-export function numberToPercent(
+export function numberToPercent (
   num: number,
   locale: 'zh-cn' | 'en' = 'zh-cn',
   style: 'percent' = 'percent',
@@ -49,7 +49,7 @@ export function numberToPercent(
  * @param currencyDisplay 货币符号,默认'symbol', 'code'(ISO货币符) | 'name'(货币名) | 'symbol'(货币符号) | 'narrowSymbol'(简化的货币符号)
  * @returns
  */
-export function numberToMonetization(
+export function numberToMonetization (
   num: number,
   locale: 'zh-cn' | 'en' = 'zh-cn',
   style: 'currency' = 'currency',

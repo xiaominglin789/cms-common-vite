@@ -92,18 +92,18 @@ import { formatTimeStamp } from '@/utils/utils'
 
 const page = ref(1)
 const size = ref(2)
-const userListResponse = ref(<UserListResponse>{})
-const userList = computed(() => {
-  return userListResponse.value.list
-})
+// 数据来源store
+let userListResponse = <UserListResponse>{}
+const userList = userListResponse.total
+
 const total = computed(() => {
-  return userListResponse.value.total || 0
+  return userListResponse.total || 0
 })
 
 onMounted(async () => {
   const result = await getUserList(page.value, size.value)
   if (result.data) {
-    userListResponse.value = result.data
+    userListResponse = result.data
   }
 })
 

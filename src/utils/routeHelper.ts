@@ -3,14 +3,14 @@ import { RouteRecordRaw } from 'vue-router'
 /** 处理路由转菜单 */
 export class RouteHelper {
   /** 检测Raw是否为空值 */
-  private static checkIsNull(route: any) {
+  private static checkIsNull (route: any) {
     if (!route) return true
     if (JSON.stringify(route) === '{}') return true
     if (JSON.stringify(route) === '') return true
   }
 
   /** 获取子级路由 */
-  private static getChildrenRoutes(routes: RouteRecordRaw[]) {
+  private static getChildrenRoutes (routes: RouteRecordRaw[]) {
     const result = <RouteRecordRaw[]>[]
     routes.forEach((route) => {
       if (route.children && route.children.length > 0) {
@@ -21,7 +21,7 @@ export class RouteHelper {
   }
 
   /** 过滤不重复的路由表: 脱离层级的路由 + 带有子路由的顶层路由 */
-  public static filterRoutes(routes: RouteRecordRaw[]) {
+  public static filterRoutes (routes: RouteRecordRaw[]) {
     const childRoutes = RouteHelper.getChildrenRoutes(routes)
     return routes.filter((route) => {
       return !childRoutes.find((item) => {
@@ -36,7 +36,7 @@ export class RouteHelper {
    *  - 过滤后的路由表根据menu规则,转成menu所需结构
    * @param routes 过滤后的路由表
    */
-  public static routeToMenu(routes: RouteRecordRaw[], basePath = '') {
+  public static routeToMenu (routes: RouteRecordRaw[], basePath = '') {
     const result = <RouteRecordRaw[]>[]
 
     routes.forEach((item) => {

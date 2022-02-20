@@ -17,11 +17,12 @@ export class AuthManualTokenExpireIn {
   private static loginTime: number = Number(
     LocalStorageHelper.get(CONST_SYS_LOGIN_TIME_KEY) || 0
   )
+
   /** 本地制定的失效时长:ms */
   private static expireInTime: number = CONST_SYS_LOGIN_TOKEN_EXPIRE_OUT || 0
 
   /** 记录登录时间 */
-  public static saveCurrentLoginTime(): void {
+  public static saveCurrentLoginTime (): void {
     AuthManualTokenExpireIn.loginTime = getCurrentTimeStamp()
     LocalStorageHelper.set(
       CONST_SYS_LOGIN_TIME_KEY,

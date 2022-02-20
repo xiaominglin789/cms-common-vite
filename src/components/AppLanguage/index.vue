@@ -5,7 +5,10 @@
     @command="onChangeLanguage"
     trigger="click"
   >
-    <svg-icon :size="size" :icon="icon"></svg-icon>
+    <svg-icon
+      :size="size"
+      :icon="icon"
+    />
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item

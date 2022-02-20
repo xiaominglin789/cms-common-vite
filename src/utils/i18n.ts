@@ -6,7 +6,7 @@ const localeStore = useLocaleStore()
 const { currentLang } = storeToRefs(localeStore)
 
 /** 输出: menu菜单的title键名取出语言包对应的实际文本 */
-export function generalRouteMenuTitle(title: string) {
+export function generalRouteMenuTitle (title: string) {
   return localeStore.msg('route.' + title)
 }
 

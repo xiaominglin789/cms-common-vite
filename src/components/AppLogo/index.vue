@@ -1,10 +1,22 @@
 <template>
-  <div v-if="src" class="logo-container">
+  <div
+    v-if="src"
+    class="logo-container"
+  >
     <div class="logo-avatar">
-      <el-avatar :size="size" :shape="shape" :src="src"></el-avatar>
+      <el-avatar
+        :size="size"
+        :shape="shape"
+        :src="src"
+      />
     </div>
-    <div v-show="opened" class="logo-title">
-      <h1 v-if="title">{{ title }}</h1>
+    <div
+      v-show="opened"
+      class="logo-title"
+    >
+      <h1 v-if="title">
+        {{ title }}
+      </h1>
     </div>
   </div>
 </template>
