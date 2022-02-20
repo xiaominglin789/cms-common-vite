@@ -4,12 +4,12 @@ import { numberMinAddZoreBefore } from './numberConvert'
  * 检测资源是否为外部网络资源
  * @param path
  */
-export function checkIsWebURL (path: string) {
+export function checkIsWebURL(path: string) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
 
 /** 判断数组是否为空 */
-export function isEmptyArray (array: Array<any>) {
+export function isEmptyArray(array: Array<any>) {
   const currentTypeStr = Object.prototype.toString.call(array)
   if (currentTypeStr !== '[object Array]') {
     throw new Error('that is not Array, that is ' + currentTypeStr)
@@ -22,7 +22,7 @@ export function isEmptyArray (array: Array<any>) {
  * 获取当前时间戳
  * @returns 单位毫秒:ms
  */
-export function getCurrentTimeStamp () {
+export function getCurrentTimeStamp() {
   return new Date().getTime()
 }
 
@@ -34,7 +34,7 @@ export function getCurrentTimeStamp () {
  * @param appendChar 日期+时间之间分割字符,默认: " "
  * @returns
  */
-export function formatTimeStamp (
+export function formatTimeStamp(
   timeStamp: number,
   dateChar = '-',
   timeChar = ':',

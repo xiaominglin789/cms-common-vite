@@ -1,10 +1,7 @@
 <template>
   <div class="dynamic-theme">
     <el-dropdown trigger="click">
-      <svg-icon
-        :size="size"
-        :icon="icon"
-      />
+      <svg-icon :size="size" :icon="icon" />
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item @click="openDialog">
@@ -24,22 +21,14 @@
       <!-- 取色器 -->
       <div class="color-box">
         <span>{{ $t('sys.themeChangeText') }}</span>
-        <el-color-picker
-          v-model="selectColor"
-          :predefine="predefineColors"
-        />
+        <el-color-picker v-model="selectColor" :predefine="predefineColors" />
       </div>
       <template #footer>
         <el-button @click="closeDialog">
           {{ $t('sys.cancel') }}
         </el-button>
-        <el-button
-          type="primary"
-          @click="themeColorChange"
-        >
-          {{
-            $t('sys.confirm')
-          }}
+        <el-button type="primary" @click="themeColorChange">
+          {{ $t('sys.confirm') }}
         </el-button>
       </template>
     </el-dialog>
@@ -99,6 +88,9 @@ const themeColorChange = async () => {
 
 <style lang="scss" scoped>
 .dynamic-theme {
+  /** 未来将会出现和其他层级重叠导致闪烁的bug，需要动态获取color-picker的css-class-name一起设置：z-index */
+  z-index: 2010;
+  pointer-events: auto;
   :deep(.color-box) {
     display: flex;
     align-items: center;
@@ -106,5 +98,8 @@ const themeColorChange = async () => {
       margin-right: 4px;
     }
   }
+}
+.el-color-picker__panel {
+  background-color: green !important;
 }
 </style>

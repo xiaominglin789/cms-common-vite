@@ -57,13 +57,13 @@
         <!-- 创建时间 -->
         <el-table-column label="创建时间" width="180">
           <template #default="{ row }">
-            {{ formatTimeStamp(row.create_time) }}
+            {{ formatTimeStamp(row.createTime) }}
           </template>
         </el-table-column>
         <!-- 更新时间 -->
         <el-table-column label="更新时间">
           <template #default="{ row }">
-            {{ formatTimeStamp(row.update_time) }}
+            {{ formatTimeStamp(row.updateTime) }}
           </template>
         </el-table-column>
       </el-table>
@@ -86,24 +86,26 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { getUserList } from '@/api/admin'
-import { UserListResponse } from '@/utils/interfaces/admin'
+import { UserListResponse, UserListType } from '@/utils/interfaces/admin'
 import { ElMessage } from 'element-plus'
 import { formatTimeStamp } from '@/utils/utils'
 
 const page = ref(1)
 const size = ref(2)
 // 数据来源store
-let userListResponse = <UserListResponse>{}
-const userList = userListResponse.total
+let userListResponse = ref(<UserListResponse>{})
+
+const userList = ref(Array<UserListType>())
 
 const total = computed(() => {
-  return userListResponse.total || 0
+  return userListResponse.value.total || 0
 })
 
 onMounted(async () => {
   const result = await getUserList(page.value, size.value)
   if (result.data) {
-    userListResponse = result.data
+    userListResponse.value = result.data
+    userList.value = result.data.list
   }
 })
 
